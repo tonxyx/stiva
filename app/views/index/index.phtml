@@ -1,0 +1,14 @@
+<?php echo $this->getContent(); ?>
+
+<div class="jumbotron">
+  <h1>STIVA razara</h1>
+  <p>Upload narudžbe:</p>
+
+  <?php echo $this->tag->form(['order/add', 'method' => 'post', 'enctype' => 'multipart/form-data']);
+
+  echo $form->render('order'); ?>
+
+  <button type="submit">Submit</button>
+
+  <?php echo $this->tag->endForm(); ?>
+</div>

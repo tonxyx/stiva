@@ -1,0 +1,23 @@
+<?php echo $this->getContent(); ?>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>Customer order</tr>
+    <tr>type</tr>
+    <tr>quantity</tr>
+    <tr>barcode</tr>
+    <tr>data</tr>
+  </thead>
+  <tbody>
+    <?php foreach ($managedData as $item) { ?>
+      <tr>
+        <td><?php echo $item['customer_order']; ?></td>
+        <td><?php echo $item['type']; ?></td>
+        <td><?php echo $item['quantity']; ?></td>
+        <td><?php echo $item['barcode']; ?></td>
+        <td><?php echo $item['calculationData']['packingInfo']; ?></td>
+        <td><?php echo $item['calculationData']['totalLeftoverQuantity']; ?></td>
+      </tr>
+    <?php } ?>
+  </tbody>
+</table>

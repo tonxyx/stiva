@@ -1,0 +1,7 @@
+<?php echo $this->getContent(); ?>
+
+<?php foreach ($items as $item) {
+  echo $item->group . ' - ' . $item->order_id . ' - ' . $item->pal_cov . ' - ' . $item->date . ' ' .
+    $item->customer_order . ' - ' . $item->type . ' - ' . $item->set . ' - ' . $item->quantity . ' ' .
+    $item->width . ' - ' . $item->length . ' - ' . $item->barcode . ' - ' . $item->delivery_date . '<hr>' . PHP_EOL;
+} ?>

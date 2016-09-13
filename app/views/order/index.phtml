@@ -1,0 +1,9 @@
+<?php echo $this->getContent(); ?>
+
+<?php foreach ($data->items as $item) {
+  echo $item->name . ' - ' . $item->file_name . ' - ' . $item->upload_date . ' - ' . $item->delivery_date . ' ' .
+    $this->tag->linkTo('order/details/' . $item->id, 'Details') .
+    $this->tag->linkTo('order/manage/' . $item->id, ' Manage') .
+    $this->tag->linkTo('order/export/' . $item->id, ' Export') . '<hr>' . PHP_EOL;
+} ?>
+
