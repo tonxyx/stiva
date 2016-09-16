@@ -8,7 +8,7 @@ class OrderController extends ControllerBase {
   }
 
   public function indexAction () {
-    $orders = Orders::find();
+    $orders = Orders::find(['order' => 'upload_date desc']);
     $currentPage = $this->request->get('page', 1);
 
     $paginator   = new \Phalcon\Paginator\Adapter\Model(
@@ -54,7 +54,10 @@ class OrderController extends ControllerBase {
         $this->flash->success("File uploaded and saved.");
         return $this->response->redirect('order/index');
       } else {
-        echo '<pre>'; var_dump($form->getMessages()); die();
+        foreach ($form->getMessages() as $message)
+          $this->flash->error($message->getMessage());
+
+        return $this->response->redirect('index/index');
       }
     }
 
@@ -62,66 +65,94 @@ class OrderController extends ControllerBase {
   }
 
   public function detailsAction ($id) {
-    $this->view->items = Items::find(['parent_order' => $id]);
+    $this->view->items = Items::find("parent_order=$id");
   }
 
   public function manageAction ($id) {
-    $items = Items::find(['parent_order' => $id]);
+    $items = Items::find("parent_order=$id");
 
     $managedData = [];
     foreach ($items as $item) {
-      $calculationData = [];
-      $typePackingParams = $this->fixture['types'][$item->type];
-
-      $package = new Packages();
-      $package->item_id = $item->id;
-      $package->item_id = $item->id;
-
-      if (count($typePackingParams) == 1) {
-        $package->primary_no = $calculationData['primaryNo'] = intval($item->quantity/$typePackingParams[0]);
-        $package->primary_quantity = $calculationData['primaryQuantity'] = $calculationData['primaryNo'] *
-          $typePackingParams[0];
-        $package->primary_leftover_quantity = $calculationData['primaryLeftoverQuantity'] = $item->quantity -
-          $calculationData['primaryQuantity'];
-        $package->total_quantity = $calculationData['totalQuantity'] = $calculationData['primaryQuantity'];
-        $package->total_leftover_quantity = $calculationData['totalLeftoverQuantity'] = $item->quantity -
-          $calculationData['totalQuantity'];
-
-        $package->packing_info = $calculationData['packingInfo'] = sprintf('%d * %d + %d',
-          $calculationData['primaryNo'], $typePackingParams[0], $calculationData['primaryLeftoverQuantity']);
-      } else {
-        $packingParamsSum = $typePackingParams[0] + $typePackingParams[1];
-        $package->primary_no = $calculationData['primaryNo'] = intval($item->quantity/$packingParamsSum);
-        $package->primary_quantity = $calculationData['primaryQuantity'] = $calculationData['primaryNo'] *
-          $typePackingParams[0];
-        $package->primary_leftover_quantity = $calculationData['primaryLeftoverQuantity'] = $item->quantity -
-          $calculationData['primaryQuantity'];
-
-        $package->secondary_no = $calculationData['secondaryNo'] =
-          intval($calculationData['primaryLeftoverQuantity']/$typePackingParams[1]);
-        $package->secondary_quantity = $calculationData['secondaryQuantity'] = $calculationData['secondaryNo'] *
-          $typePackingParams[1];
-        $package->total_quantity = $calculationData['totalQuantity'] = $calculationData['primaryQuantity'] +
-          $calculationData['secondaryQuantity'];
-        $package->total_leftover_quantity = $calculationData['totalLeftoverQuantity'] = $item->quantity -
-          $calculationData['totalQuantity'];
-
-        $package->packing_info = $calculationData['packingInfo'] = sprintf('%d * %d + %d * %d',
-          $calculationData['primaryNo'], $typePackingParams[0],  $calculationData['secondaryNo'], $typePackingParams[1]);
-      }
-
-      // todo reimolement for unique insert
-//      $package->save();
-
       $managedData[$item->id] = [
         'customer_order' => $item->customer_order,
         'type' => $item->type,
         'quantity' => $item->quantity,
         'barcode' => $item->barcode,
-        'calculationData' => $calculationData,
+        'calculationData' => Packages::find("item_id=$item->id")->toArray()[0],
       ];
     }
 
     $this->view->managedData = $managedData;
+  }
+
+  /**
+   * Export single item printing blocks
+   *
+   * @param $id
+   *
+   * @return array
+   */
+  public function exportSingleAction ($id) {
+    $item =  Items::findFirst("id=$id");
+    $itemPackage = Packages::findFirst("item_id=$id");
+    $types = $this->fixture['types'];
+    $totalPacks = 0;
+
+    $printData = [
+      'type' => $item->type,
+      'width' => $item->width,
+      'length' => $item->length,
+      'customerOrder' => $item->customer_order,
+    ];
+
+    if (count($types[$item->type]) == 1) {
+      $barcodeSecondPart = str_pad($types[$item->type][0], 3, '0', STR_PAD_LEFT);
+
+      for ($i = 1; $i <= $itemPackage->primary_no; $i++, $totalPacks++) {
+        $barcode = substr_replace($item->barcode, str_pad($i, 3, '0', STR_PAD_LEFT) . '-' . $barcodeSecondPart, -7);
+        $printData['items']['barcode'][] = $barcode;
+        $printData['items']['barcodeCode'][] = $this->generateBarcodePNG($barcode);
+        $printData['items']['totalOfNo'][] = $i;
+      }
+
+      if ($itemPackage->primary_leftover_quantity) {
+        $barcodeLeftover = substr_replace($item->barcode, str_pad(++$itemPackage->primary_no, 3, '0', STR_PAD_LEFT) .
+          '-' . str_pad($itemPackage->primary_leftover_quantity, 3, '0', STR_PAD_LEFT), -7);
+        $printData['items']['barcode'][] = $barcodeLeftover;
+        $printData['items']['barcodeCode'][] = $this->generateBarcodePNG($barcodeLeftover);
+        $printData['items']['totalOfNo'][] = $itemPackage->primary_no;
+        $totalPacks++;
+      }
+
+    } else if (count($types[$item->type]) == 2) {
+      $barcodeSecondPartPrimary = str_pad($types[$item->type][0], 3, '0', STR_PAD_LEFT);
+      $barcodeSecondPartSecondary = str_pad($types[$item->type][1], 3, '0', STR_PAD_LEFT);
+
+      for ($i = 1; $i <= $itemPackage->primary_no; $i++, $totalPacks++) {
+        $barcode = substr_replace($item->barcode, str_pad($i, 3, '0', STR_PAD_LEFT) . '-' . $barcodeSecondPartPrimary, -7);
+        $printData['items']['barcode'][] = $barcode;
+        $printData['items']['barcodeCode'][] = $this->generateBarcodePNG($barcode);
+        $printData['items']['totalOfNo'][] = $i;
+      }
+
+      for ($j = 1; $j <= $itemPackage->secondary_no; $j++, $totalPacks++) {
+        $barcode = substr_replace($item->barcode, str_pad($i, 3, '0', STR_PAD_LEFT) . '-' . $barcodeSecondPartSecondary, -7);
+        $printData['items']['barcode'][] = $barcode;
+        $printData['items']['barcodeCode'][] = $this->generateBarcodePNG($barcode);
+        $printData['items']['totalOfNo'][] = $i;
+      }
+
+      echo '<pre>'; var_dump($printData); die();
+    }
+
+    $printData['totalPacks'] = $totalPacks;
+
+    $this->view->printData = $printData;
+  }
+
+  private function generateBarcodePNG ($barcode) {
+    $barcodeGenerator = new \Picqer\Barcode\BarcodeGeneratorPNG();
+    return 'data:image/png;base64,' . base64_encode(
+      $barcodeGenerator->getBarcode($barcode, $barcodeGenerator::TYPE_CODE_39));
   }
 }

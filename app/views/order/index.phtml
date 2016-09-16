@@ -1,9 +1,28 @@
 <?php echo $this->getContent(); ?>
 
-<?php foreach ($data->items as $item) {
-  echo $item->name . ' - ' . $item->file_name . ' - ' . $item->upload_date . ' - ' . $item->delivery_date . ' ' .
-    $this->tag->linkTo('order/details/' . $item->id, 'Details') .
-    $this->tag->linkTo('order/manage/' . $item->id, ' Manage') .
-    $this->tag->linkTo('order/export/' . $item->id, ' Export') . '<hr>' . PHP_EOL;
-} ?>
-
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <td>Name</td>
+      <td>File name</td>
+      <td>Upload date</td>
+      <td>Delivery date</td>
+      <td colspan="3">Actions</td>
+    </tr>
+  </thead>
+  <tbody>
+  <?php foreach ($data->items as $item) { ?>
+    <tr>
+      <td><?php echo $item->name; ?></td>
+      <td><?php echo $item->file_name; ?></td>
+      <td><?php echo date('d.m.Y', strtotime($item->upload_date)); ?></td>
+      <td><?php echo $item->delivery_date; ?></td>
+      <td colspan="3">
+        <?php echo $this->tag->linkTo(['order/details/' . $item->id, 'Details', 'class' => 'btn btn-default']); ?>
+        <?php echo $this->tag->linkTo(['order/manage/' . $item->id, ' Manage', 'class' => 'btn btn-primary']); ?>
+        <?php echo $this->tag->linkTo(['order/export/' . $item->id, ' Export', 'class' => 'btn btn-success']); ?>
+      </td>
+    </tr>
+  <?php } ?>
+  </tbody>
+</table>

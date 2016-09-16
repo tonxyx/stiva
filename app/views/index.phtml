@@ -4,9 +4,10 @@
     <meta charset="utf-8">
     <title>STIVA ;)</title>
 
-    <?php $this->assets->outputCss(); ?>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='shortcut icon' href='<?php echo $this->url->getStatic('favicon.ico'); ?>' type='image/x-icon'/ >
+    
+    <?php $this->assets->outputCss(); ?>
   </head>
   <body>
     <?php echo $this->getContent(); ?>

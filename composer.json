@@ -1,0 +1,6 @@
+{
+  "minimum-stability": "dev",
+  "require": {
+    "picqer/php-barcode-generator": "master"
+  }
+}

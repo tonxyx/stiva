@@ -21,6 +21,7 @@ try {
    * Auto-loader configuration
    */
   require APP_PATH . 'app/config/loader.php';
+  require APP_PATH . 'vendor/autoload.php';
 
   $application = new Application(new Services($config));
 

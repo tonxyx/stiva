@@ -8,6 +8,15 @@ Documentation for the framework can be found on the Phalcon's website.
 
 ##Initial STIVA setup
 
+- get vagrant from https://github.com/phalcon/vagrant
+- add stiva clone inside vagrant/www/ folder
+- execute vagrant up
+- after installation run vagrant ssh
+- run mysql with "mysql -uroot -p" -> password is empty
+- create database stiva
+- create vhost in /etc/hosts (192.168.50.4  vagrant.local)
+- visit http://vagrant.local and choose your project
+
 For additional problems feel free to ask. ;)
 
 ##Documentation - plan
