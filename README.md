@@ -14,6 +14,7 @@ Documentation for the framework can be found on the Phalcon's website.
 - after installation run vagrant ssh
 - run mysql with "mysql -uroot -p" -> password is empty
 - create database stiva
+- generate database from /schemas/stiva.sql (mysql -uroot -p stiva < /schemas/stiva.sql)
 - create vhost in /etc/hosts (192.168.50.4  vagrant.local)
 - visit http://vagrant.local and choose your project
 

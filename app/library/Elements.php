@@ -19,6 +19,10 @@ class Elements extends Component {
         'caption' => 'Orders',
         'action' => 'index',
       ],
+      'export' => [
+        'caption' => 'Manual export',
+        'action' => 'index',
+      ],
     ],
   ];
 
@@ -28,23 +32,14 @@ class Elements extends Component {
    * @return string
    */
   public function getMenu () {
-
-    $auth = $this->session->get('auth');
-    if ($auth) {
-      $this->_headerMenu['navbar-right']['session'] = [
-        'caption' => 'Log Out',
-        'action' => 'end',
-      ];
-    } else {
-      unset($this->_headerMenu['navbar-left']['invoices']);
-    }
-
     $controllerName = $this->view->getControllerName();
+    $actionName = $this->view->getActionName();
+
     foreach ($this->_headerMenu as $position => $menu) {
       echo '<div class="nav-collapse">';
       echo '<ul class="nav navbar-nav ', $position, '">';
       foreach ($menu as $controller => $option) {
-        if ($controllerName == $controller) {
+        if ($controllerName == $controller && $option['action'] == $actionName) {
           echo '<li class="active">';
         } else {
           echo '<li>';

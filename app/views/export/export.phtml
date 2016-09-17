@@ -1,0 +1,46 @@
+<?php echo $this->getContent(); ?>
+
+<table class="table table-bordered table-stripped">
+<?php foreach ($orderData as $orderItemData) {
+  if ($orderItemData) {
+    foreach ($orderItemData['items']['barcode'] as $itemKey => $itemValue) { ?>
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td><img src="<?php echo $orderItemData['items']['barcodeCode'][$itemKey]; ?>"></td>
+              <td><h2>Drvenjaca</h2></td>
+            </tr>
+            <tr>
+              <td>*<?php echo $itemValue; ?>*</td>
+            </tr>
+            <tr>
+              <td><strong>Tip palete:</strong></td>
+              <td><?php echo $orderItemData['type']; ?></td>
+            </tr>
+            <tr>
+              <td><strong>Format:</strong></td>
+              <td><?php echo $orderItemData['width'] . ' x ' . $orderItemData['length']; ?></td>
+            </tr>
+            <tr>
+              <td><strong>Niz/št.enot:</strong></td>
+              <td><?php echo $orderItemData['items']['totalOfNo'][$itemKey] . '/' .
+                  $orderItemData['items']['totalInPackage'][$itemKey]; ?></td>
+            </tr>
+            <tr>
+              <td><?php echo $orderItemData['customerOrder']; ?></td>
+            </tr>
+            <tr>
+              <td><img src="<?php echo $orderItemData['items']['barcodeCode'][$itemKey]; ?>"></td>
+            </tr>
+            <tr>
+              <td>*<?php echo $itemValue; ?>*</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    <?php }
+  }
+} ?>
+</table>
+

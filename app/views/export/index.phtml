@@ -1,0 +1,80 @@
+<?php echo $this->getContent();
+
+if (isset($printData)) { ?>
+  <table class="table table-bordered table-stripped">
+    <tr>
+      <td>
+        <table>
+          <tr>
+            <td><img src="<?php echo $printData['barcodeCode']; ?>"></td>
+            <td><h2>Drvenjaca</h2></td>
+          </tr>
+          <tr>
+            <td>*<?php echo $printData['barcode']; ?>*</td>
+          </tr>
+          <tr>
+            <td><strong>Tip palete:</strong></td>
+            <td><?php echo $printData['type']; ?></td>
+          </tr>
+          <tr>
+            <td><strong>Format:</strong></td>
+            <td><?php echo $printData['width'] . ' x ' . $printData['length']; ?></td>
+          </tr>
+          <tr>
+            <td><strong>Niz/št.enot:</strong></td>
+            <td><?php echo $printData['orderNo']; ?></td>
+          </tr>
+          <tr>
+            <td><?php echo $printData['customerOrder']; ?></td>
+          </tr>
+          <tr>
+            <td><img src="<?php echo $printData['barcodeCode']; ?>"></td>
+          </tr>
+          <tr>
+            <td>*<?php echo $printData['barcode']; ?>*</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+<?php } else {
+  echo $this->tag->form(['export/index', 'method' => 'post']); ?>
+
+  <div class="form-group">
+    <label for="<?php echo $form->get('barcode')->getName(); ?>"><?php echo $form->get('barcode')->getLabel(); ?></label>
+    <?php echo $form->render('barcode', ['class' => 'form-control']); ?>
+    <small class="form-text text-muted text-danger">
+      Write barcode surrounded without "*", just as a plain string (1-0547157-01-2-001-172)
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="<?php echo $form->get('type')->getName(); ?>"><?php echo $form->get('type')->getLabel(); ?></label>
+    <?php echo $form->render('type', ['class' => 'form-control']); ?>
+  </div>
+
+  <div class="form-group">
+    <label for="<?php echo $form->get('width')->getName(); ?>"><?php echo $form->get('width')->getLabel(); ?></label>
+    <?php echo $form->render('width', ['class' => 'form-control']); ?>
+  </div>
+
+  <div class="form-group">
+    <label for="<?php echo $form->get('length')->getName(); ?>"><?php echo $form->get('length')->getLabel(); ?></label>
+    <?php echo $form->render('length', ['class' => 'form-control']); ?>
+  </div>
+
+  <div class="form-group">
+    <label for="<?php echo $form->get('orderNo')->getName(); ?>"><?php echo $form->get('orderNo')->getLabel(); ?></label>
+    <?php echo $form->render('orderNo', ['class' => 'form-control']); ?>
+  </div>
+
+  <div class="form-group">
+    <label for="<?php echo $form->get('customerOrder')->getName(); ?>">
+      <?php echo $form->get('customerOrder')->getLabel(); ?></label>
+    <?php echo $form->render('customerOrder', ['class' => 'form-control']); ?>
+  </div>
+
+  <button type="submit" class="btn btn-success">Submit</button>
+
+  <?php echo $this->tag->endForm();
+}

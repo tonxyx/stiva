@@ -20,7 +20,7 @@
       <td colspan="3">
         <?php echo $this->tag->linkTo(['order/details/' . $item->id, 'Details', 'class' => 'btn btn-default']); ?>
         <?php echo $this->tag->linkTo(['order/manage/' . $item->id, ' Manage', 'class' => 'btn btn-primary']); ?>
-        <?php echo $this->tag->linkTo(['order/export/' . $item->id, ' Export', 'class' => 'btn btn-success']); ?>
+        <?php echo $this->tag->linkTo(['export/export/' . $item->id, ' Export', 'class' => 'btn btn-success']); ?>
       </td>
     </tr>
   <?php } ?>

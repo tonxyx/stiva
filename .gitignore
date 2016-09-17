@@ -12,5 +12,6 @@ Thumbs.db
 *.sublime-workspace
 .idea/
 docs/orders/*
+!docs/orders/.gitkeep
 .phalcon
 vendor/

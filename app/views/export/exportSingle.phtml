@@ -1,0 +1,46 @@
+<?php echo $this->getContent();
+
+if ($printData) { ?>
+  <table class="table table-bordered table-stripped">
+  <?php foreach ($printData['items']['barcode'] as $itemKey => $itemValue) { ?>
+    <tr>
+      <td>
+        <table>
+          <tr>
+            <td><img src="<?php echo $printData['items']['barcodeCode'][$itemKey]; ?>"></td>
+            <td><h2>Drvenjaca</h2></td>
+          </tr>
+          <tr>
+            <td>*<?php echo $itemValue; ?>*</td>
+          </tr>
+          <tr>
+            <td><strong>Tip palete:</strong></td>
+            <td><?php echo $printData['type']; ?></td>
+          </tr>
+          <tr>
+            <td><strong>Format:</strong></td>
+            <td><?php echo $printData['width'] . ' x ' . $printData['length']; ?></td>
+          </tr>
+          <tr>
+            <td><strong>Niz/št.enot:</strong></td>
+            <td><?php echo $printData['items']['totalOfNo'][$itemKey] . '/' .
+                $printData['items']['totalInPackage'][$itemKey]; ?></td>
+          </tr>
+          <tr>
+            <td><?php echo $printData['customerOrder']; ?></td>
+          </tr>
+          <tr>
+            <td><img src="<?php echo $printData['items']['barcodeCode'][$itemKey]; ?>"></td>
+          </tr>
+          <tr>
+            <td>*<?php echo $itemValue; ?>*</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  <?php } ?>
+  </table>
+<?php } else { ?>
+  <h2>Quantity for this item is 0. Check your order manually please.</h2>
+<?php } ?>
+

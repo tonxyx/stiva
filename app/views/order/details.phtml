@@ -34,7 +34,7 @@
         <td><?php echo $item->barcode; ?></td>
         <td><?php echo $item->delivery_date; ?></td>
         <td>
-          <?php echo $this->tag->linkTo(['order/exportSingle/' . $item->id, ' Export', 'class' => 'btn btn-success'])
+          <?php echo $this->tag->linkTo(['export/exportSingle/' . $item->id, ' Export', 'class' => 'btn btn-success'])
           ; ?>
         </td>
       </tr>
