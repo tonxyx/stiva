@@ -1,14 +1,27 @@
 <?php echo $this->getContent(); ?>
 
-<div class="jumbotron">
-  <h1>STIVA razara</h1>
-  <p>Upload narudžbe:</p>
+<div class="row">
+  <div class="col-md-12">
 
-  <?php echo $this->tag->form(['order/add', 'method' => 'post', 'enctype' => 'multipart/form-data']);
+    <h1>STIVA razara</h1>
+    <p class="lead">Upload narudžbe:</p>
 
-  echo $form->render('order'); ?>
+    <?php echo $this->tag->form(['order/add', 'method' => 'post', 'enctype' => 'multipart/form-data']); ?>
 
-  <button type="submit">Submit</button>
+    <div class="form-file">
+      <span class="form-file_text">Click to upload file</span>
+      <span class="form-file_value"></span>
+      <?php echo $form->render('order'); ?>
+    </div>
 
-  <?php echo $this->tag->endForm(); ?>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <button class="btn btn-lg btn-block btn-success" type="submit">
+          <i class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 2h6v1h-6v-1zm6-1v-1h-6v1h6zm-5.146 21l-1.854 2h8l-1.854-2h-4.292zm10.146-14h-5v-4h-6v4h-5l8 8 8-8zm-2 11h-12v-6.172l-2-2v10.172h16v-10.172l-2 2v6.172z"/></svg></i><br>Import file</button>
+      </div>
+    </div>
+
+    <?php echo $this->tag->endForm(); ?>
+  </div>
 </div>
+

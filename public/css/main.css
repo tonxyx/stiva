@@ -1,0 +1,108 @@
+.btn svg {
+  width: 40px;
+  height: auto; }
+  .btn svg * {
+    fill: white;
+    width: 100%;
+    height: auto; }
+.btn-print {
+  min-width: 200px; }
+  .btn-print svg {
+    width: 20px; }
+
+.form-file {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  margin-bottom: 2rem;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.1); }
+  .form-file_text {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2em;
+    margin: auto;
+    text-align: center;
+    font-size: 2em; }
+  .form-file_value {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    background: orange;
+    margin: auto;
+    text-align: center;
+    font-size: 2em;
+    color: white; }
+    .form-file_value:empty {
+      display: none; }
+
+input[type=file] {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  cursor: pointer; }
+
+.receipt_item {
+  position: relative; }
+  @media print {
+    .receipt_item {
+      page-break-inside: avoid; } }
+  @media screen {
+    .receipt_item:not(:first-child) {
+      margin-top: 3rem; } }
+.receipt_company {
+  text-align: right; }
+  .receipt_company h1 {
+    text-transform: uppercase;
+    font-weight: bold; }
+.receipt_customer_order {
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-bottom: 0.5em; }
+.receipt_description {
+  font-size: 2em;
+  margin-bottom: 0.2em; }
+  .receipt_description_type {
+    display: inline-block;
+    width: 7.5em; }
+  .receipt_description_value {
+    display: inline-block; }
+.receipt_barcode_wrapper-side {
+  position: absolute;
+  top: 120px;
+  width: 30%;
+  margin: auto 0;
+  right: 80px;
+  transform-origin: top right;
+  transform: rotate(-90deg); }
+  @media screen {
+    .receipt_barcode_wrapper-side {
+      display: none; } }
+.receipt_barcode_image {
+  width: 100%;
+  min-height: 50px; }
+.receipt_barcode_code {
+  display: block;
+  font-size: 2.5em;
+  text-align: center; }
+  .receipt_barcode_wrapper-side .receipt_barcode_code {
+    font-size: 1em; }
+
+@page {
+  size: A5 landscape;
+  margin: 0.5cm;
+  page-break-after: always; }
+@media print {
+  .btn, nav, footer, hr {
+    display: none; } }
+
+/*# sourceMappingURL=main.css.map */

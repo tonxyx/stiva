@@ -1,45 +1,66 @@
 <?php echo $this->getContent();
 
 if ($printData) { ?>
-  <table class="table table-bordered table-stripped">
-  <?php foreach ($printData['items']['barcode'] as $itemKey => $itemValue) { ?>
-    <tr>
-      <td>
-        <table>
-          <tr>
-            <td><img src="<?php echo $printData['items']['barcodeCode'][$itemKey]; ?>"></td>
-            <td><h2>Drvenjaca</h2></td>
-          </tr>
-          <tr>
-            <td>*<?php echo $itemValue; ?>*</td>
-          </tr>
-          <tr>
-            <td><strong>Tip palete:</strong></td>
-            <td><?php echo $printData['type']; ?></td>
-          </tr>
-          <tr>
-            <td><strong>Format:</strong></td>
-            <td><?php echo $printData['width'] . ' x ' . $printData['length']; ?></td>
-          </tr>
-          <tr>
-            <td><strong>Niz/št.enot:</strong></td>
-            <td><?php echo $printData['items']['totalOfNo'][$itemKey] . '/' .
-                $printData['items']['totalInPackage'][$itemKey]; ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $printData['customerOrder']; ?></td>
-          </tr>
-          <tr>
-            <td><img src="<?php echo $printData['items']['barcodeCode'][$itemKey]; ?>"></td>
-          </tr>
-          <tr>
-            <td>*<?php echo $itemValue; ?>*</td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  <?php } ?>
-  </table>
+
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-print btn-lg btn-primary pull-right" onClick="window.print()"><svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="24" height="24" viewBox="0 0 24 24"><path d="M16 17h-8v-1h8v1zm8-12v13h-4.048c-.404 2.423-3.486 6-6.434 6h-9.518v-6h-4v-13h4v-5h16v5h4zm-18 0h12v-3h-12v3zm12 9h-12v8h6.691c3.469 0 2-3.352 2-3.352s3.309 1.594 3.309-2v-2.648zm4-7h-20v9h2v-4h16v4h2v-9zm-9 11h-5v1h5v-1zm7.5-10c-.276 0-.5.224-.5.5s.224.5.5.5.5-.224.5-.5-.224-.5-.5-.5z"/></svg>
+        <br>Print</button>
+      <div class="clearfix"></div>
+      <hr>
+    </div>
+  </div>
+
+  <div class="receipt_wrapper">
+    <?php foreach ($printData['items']['barcode'] as $itemKey => $itemValue) { ?>
+      <section class="receipt_item">
+
+        <div class="receipt_company">
+          <h1>Drvenjaca</h1>
+        </div>
+
+        <div class="receipt_barcode_wrapper">
+          <img class="receipt_barcode_image" src="<?php echo $printData['items']['barcodeCode'][$itemKey]; ?>">
+          <span class="receipt_barcode_code">*<?php echo $itemValue; ?>*</span>
+        </div>
+
+        <dl class="receipt_description">
+          <dt class="receipt_description_type"><strong>Tip palete:</strong></dt>
+          <dd class="receipt_description_value"><?php echo $printData['type']; ?></dd>
+        </dl>
+        <dl class="receipt_description">
+          <dt class="receipt_description_type"><strong>Format:</strong></dt>
+          <dd class="receipt_description_value"><?php echo $printData['width'] . ' x ' . $printData['length']; ?></dd>
+        </dl>
+        <dl class="receipt_description">
+          <dt class="receipt_description_type"><strong>Niz/št.enot:</strong></dt>
+          <dd class="receipt_description_value"><?php echo $printData['items']['totalOfNo'][$itemKey] . '/' .
+              $printData['items']['totalInPackage'][$itemKey]; ?></dd>
+        </dl>
+
+        <div class="receipt_customer_order"><?php echo $printData['customerOrder']; ?></div>
+
+        <div class="receipt_barcode_wrapper">
+          <img class="receipt_barcode_image" src="<?php echo $printData['items']['barcodeCode'][$itemKey]; ?>">
+          <span class="receipt_barcode_code">*<?php echo $itemValue; ?>*</span>
+        </div>
+
+        <div class="receipt_barcode_wrapper-side">
+          <img class="receipt_barcode_image" src="<?php echo $printData['items']['barcodeCode'][$itemKey]; ?>">
+          <span class="receipt_barcode_code">*<?php echo $itemValue; ?>*</span>
+        </div>
+
+      </section>
+    <?php } ?>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <hr>
+      <button class="btn btn-print btn-lg btn-primary" onClick="window.print()"><svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="24" height="24" viewBox="0 0 24 24"><path d="M16 17h-8v-1h8v1zm8-12v13h-4.048c-.404 2.423-3.486 6-6.434 6h-9.518v-6h-4v-13h4v-5h16v5h4zm-18 0h12v-3h-12v3zm12 9h-12v8h6.691c3.469 0 2-3.352 2-3.352s3.309 1.594 3.309-2v-2.648zm4-7h-20v9h2v-4h16v4h2v-9zm-9 11h-5v1h5v-1zm7.5-10c-.276 0-.5.224-.5.5s.224.5.5.5.5-.224.5-.5-.224-.5-.5-.5z"/></svg>
+        <br>Print</button>
+    </div>
+  </div>
 <?php } else { ?>
   <h2>Quantity for this item is 0. Check your order manually please.</h2>
 <?php } ?>

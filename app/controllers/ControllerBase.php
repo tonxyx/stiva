@@ -7,7 +7,8 @@ class ControllerBase extends Controller {
   protected function initialize () {
     $this->tag->prependTitle('STIVA | ');
     $this->view->setTemplateAfter('main');
-    $this->assets->addCss('css/bootstrap.min.css');
+    $this->assets->addCss('css/bootstrap.min.css')
+      ->addCss('css/main.css');
     $this->assets->addJs('js/jquery.min.js')
       ->addJs('js/bootstrap.min.js')
       ->addJs('js/utils.js');
