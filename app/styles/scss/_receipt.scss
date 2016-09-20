@@ -1,0 +1,95 @@
+.receipt {
+
+  &_wrapper {}
+
+  &_item {
+    position: relative;
+
+    @media print {
+      page-break-inside: avoid;
+    }
+
+    @media screen {
+
+      &:not(:first-child) {
+        margin-top: 3rem;
+      }
+
+    }
+
+  }
+
+  &_company {
+    text-align: right;
+    h1 {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  }
+
+  &_customer {
+
+    &_order {
+      text-align: center;
+      font-size: 2.5em;
+      font-weight: bold;
+      margin-bottom: 0.5em;
+    }
+
+  }
+
+  &_description {
+    font-size: 2em;
+    margin-bottom: 0.2em;
+
+    &_type {
+      display: inline-block;
+      width: 7.5em;
+    }
+
+    &_value {
+      display: inline-block;
+    }
+
+  }
+
+  &_barcode {
+
+    &_wrapper {
+
+      &-side {
+        position: absolute;
+        top: 120px;
+        width: 30%;
+        margin: auto 0;
+        right: 80px;
+        transform-origin: top right;
+        transform: rotate(-90deg);
+
+        @media screen {
+          display: none;
+        }
+
+      }
+
+    }
+
+    &_image {
+      width: 100%;
+      min-height: 50px;
+    }
+
+    &_code {
+      display: block;
+      font-size: 2.5em;
+      text-align: center;
+
+      .receipt_barcode_wrapper-side & {
+        font-size: 1em;
+      }
+
+    }
+
+  }
+
+}
