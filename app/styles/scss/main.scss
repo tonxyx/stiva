@@ -6,19 +6,18 @@
 
 @page {
   size: A5 landscape;
-  margin: 0.5cm;
+  // margin: 0.5cm;
+  margin: 0;
   page-break-after: always;
 }
 
 @media print {
 
-  .btn, nav, footer, hr {
+  .btn,
+  nav,
+  footer,
+  hr {
     display: none;
   }
 
 }
-
-
-
-
-

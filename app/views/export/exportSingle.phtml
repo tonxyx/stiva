@@ -15,34 +15,39 @@ if ($printData) { ?>
     <?php foreach ($printData['items']['barcode'] as $itemKey => $itemValue) { ?>
       <section class="receipt_item">
 
-        <div class="receipt_company">
-          <h1>Drvenjaca</h1>
+        <div class="receipt_header">
+          <div class="receipt_company">
+            <h1>Drvenjača</h1>
+          </div>
+
+          <div class="receipt_barcode_wrapper">
+            <img class="receipt_barcode_image" src="<?php echo $printData['items']['barcodeCode'][$itemKey]; ?>">
+            <span class="receipt_barcode_code">*<?php echo $itemValue; ?>*</span>
+          </div>
         </div>
 
-        <div class="receipt_barcode_wrapper">
-          <img class="receipt_barcode_image" src="<?php echo $printData['items']['barcodeCode'][$itemKey]; ?>">
-          <span class="receipt_barcode_code">*<?php echo $itemValue; ?>*</span>
+        <div class="receipt_body">
+          <dl class="receipt_description">
+            <dt class="receipt_description_type"><strong>Tip palete:</strong></dt>
+            <dd class="receipt_description_value"><?php echo $printData['type']; ?></dd>
+          </dl>
+          <dl class="receipt_description">
+            <dt class="receipt_description_type"><strong>Format:</strong></dt>
+            <dd class="receipt_description_value"><?php echo $printData['width'] . ' x ' . $printData['length']; ?></dd>
+          </dl>
+          <dl class="receipt_description">
+            <dt class="receipt_description_type"><strong>Niz/št.enot:</strong></dt>
+            <dd class="receipt_description_value"><?php echo $printData['items']['totalOfNo'][$itemKey] . '/' .
+                $printData['items']['totalInPackage'][$itemKey]; ?></dd>
+          </dl>
+          <div class="receipt_customer_order"><?php echo $printData['customerOrder']; ?></div>
         </div>
 
-        <dl class="receipt_description">
-          <dt class="receipt_description_type"><strong>Tip palete:</strong></dt>
-          <dd class="receipt_description_value"><?php echo $printData['type']; ?></dd>
-        </dl>
-        <dl class="receipt_description">
-          <dt class="receipt_description_type"><strong>Format:</strong></dt>
-          <dd class="receipt_description_value"><?php echo $printData['width'] . ' x ' . $printData['length']; ?></dd>
-        </dl>
-        <dl class="receipt_description">
-          <dt class="receipt_description_type"><strong>Niz/št.enot:</strong></dt>
-          <dd class="receipt_description_value"><?php echo $printData['items']['totalOfNo'][$itemKey] . '/' .
-              $printData['items']['totalInPackage'][$itemKey]; ?></dd>
-        </dl>
-
-        <div class="receipt_customer_order"><?php echo $printData['customerOrder']; ?></div>
-
-        <div class="receipt_barcode_wrapper">
-          <img class="receipt_barcode_image" src="<?php echo $printData['items']['barcodeCode'][$itemKey]; ?>">
-          <span class="receipt_barcode_code">*<?php echo $itemValue; ?>*</span>
+        <div class="receipt_footer">
+          <div class="receipt_barcode_wrapper">
+            <img class="receipt_barcode_image" src="<?php echo $printData['items']['barcodeCode'][$itemKey]; ?>">
+            <span class="receipt_barcode_code">*<?php echo $itemValue; ?>*</span>
+          </div>
         </div>
 
         <div class="receipt_barcode_wrapper-side">
@@ -62,6 +67,5 @@ if ($printData) { ?>
     </div>
   </div>
 <?php } else { ?>
-  <h2>Quantity for this item is 0. Check your order manually please.</h2>
+  <h1>Quantity for this item is 0. Check your order manually please.</h1>
 <?php } ?>
-

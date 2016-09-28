@@ -1,9 +1,39 @@
+$gap-border: 4rem;
+
 .receipt {
 
   &_wrapper {}
 
+  &_header {
+    position: absolute;
+    top: 1.5rem;
+    left: 0;
+    right: 1rem;
+
+    @media screen {
+      top: $gap-border + 1.5rem;
+    }
+
+  }
+
+  &_body {
+    position: absolute;
+    top: 16rem;
+    left: 0;
+    right: 0;
+  }
+
+  &_footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
   &_item {
     position: relative;
+    // This are A5 paper dimensions with margins calculated inside, so @page needs to be margin: 0
+    width: 842px;
+    height: 595px;
 
     @media print {
       page-break-inside: avoid;
@@ -12,7 +42,9 @@
     @media screen {
 
       &:not(:first-child) {
-        margin-top: 3rem;
+        margin-top: $gap-border;
+        padding-top: $gap-border;
+        border-top: 3px dashed #dcdcdc;
       }
 
     }
@@ -20,26 +52,34 @@
   }
 
   &_company {
-    text-align: right;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
     h1 {
       text-transform: uppercase;
       font-weight: bold;
+      margin: 0;
+      @media print {
+        font-size: 25pt;
+      }
     }
   }
 
   &_customer {
 
     &_order {
-      text-align: center;
-      font-size: 2.5em;
+      // text-align: center;
+      font-size: 4em;
       font-weight: bold;
-      margin-bottom: 0.5em;
+      margin-top: 0.5em;
     }
 
   }
 
   &_description {
-    font-size: 2em;
+    font-size: 2.5em;
     margin-bottom: 0.2em;
 
     &_type {
@@ -56,36 +96,48 @@
   &_barcode {
 
     &_wrapper {
+      width: 600px;
+
+      .receipt_footer & {
+        width: 700px;
+      }
 
       &-side {
         position: absolute;
-        top: 120px;
+        top: 70%;
         width: 30%;
         margin: auto 0;
-        right: 80px;
+        right: 1.5rem;
         transform-origin: top right;
-        transform: rotate(-90deg);
-
-        @media screen {
-          display: none;
-        }
-
+        transform: rotate(90deg);
       }
 
     }
 
     &_image {
       width: 100%;
-      min-height: 50px;
+      min-height: 60px;
+
+      .receipt_footer & {
+        min-height: 90px;
+      }
+
     }
 
     &_code {
       display: block;
-      font-size: 2.5em;
+      font-size: 1.5em;
+      letter-spacing: 0.6em;
+
+      @media print {
+        // font-size: 8pt;
+      }
+
       text-align: center;
 
       .receipt_barcode_wrapper-side & {
-        font-size: 1em;
+        font-size: 6pt;
+        margin-top: 3pt;
       }
 
     }
