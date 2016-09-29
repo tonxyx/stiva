@@ -69,8 +69,8 @@ input[type=file] {
   left: 0; }
 .receipt_item {
   position: relative;
-  width: 842px;
-  height: 595px; }
+  width: 824px;
+  height: 577px; }
   @media print {
     .receipt_item {
       page-break-inside: avoid; } }
@@ -103,7 +103,7 @@ input[type=file] {
   .receipt_description_value {
     display: inline-block; }
 .receipt_barcode_wrapper {
-  width: 600px; }
+  width: 582px; }
   .receipt_footer .receipt_barcode_wrapper {
     width: 700px; }
   .receipt_barcode_wrapper-side {
@@ -119,6 +119,8 @@ input[type=file] {
   min-height: 60px; }
   .receipt_footer .receipt_barcode_image {
     min-height: 90px; }
+  .receipt_barcode_wrapper-side .receipt_barcode_image {
+    min-height: 40px; }
 .receipt_barcode_code {
   display: block;
   font-size: 1.5em;
@@ -130,7 +132,7 @@ input[type=file] {
 
 @page {
   size: A5 landscape;
-  margin: 0;
+  margin: 0.5cm;
   page-break-after: always; }
 @media print {
   .btn,

@@ -1,4 +1,5 @@
 $gap-border: 4rem;
+$paper-margin: 18px;
 
 .receipt {
 
@@ -32,8 +33,8 @@ $gap-border: 4rem;
   &_item {
     position: relative;
     // This are A5 paper dimensions with margins calculated inside, so @page needs to be margin: 0
-    width: 842px;
-    height: 595px;
+    width: 842px - $paper-margin;
+    height: 595px - $paper-margin;
 
     @media print {
       page-break-inside: avoid;
@@ -96,7 +97,7 @@ $gap-border: 4rem;
   &_barcode {
 
     &_wrapper {
-      width: 600px;
+      width: 600px - $paper-margin;
 
       .receipt_footer & {
         width: 700px;
@@ -120,6 +121,10 @@ $gap-border: 4rem;
 
       .receipt_footer & {
         min-height: 90px;
+      }
+
+      .receipt_barcode_wrapper-side & {
+        min-height: 40px;
       }
 
     }
