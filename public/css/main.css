@@ -57,6 +57,20 @@ input[type=file] {
   opacity: 0;
   cursor: pointer; }
 
+@media screen {
+  .receipt_wrapper {
+    position: relative; }
+    .receipt_wrapper:not(:first-child) {
+      margin-top: 100px; }
+    .receipt_wrapper:not(:last-child) {
+      margin-bottom: 100px; }
+      .receipt_wrapper:not(:last-child):after {
+        content: "";
+        position: absolute;
+        bottom: -50px;
+        left: 0;
+        right: 0;
+        border-bottom: 2px dashed black; } }
 .receipt_header {
   position: absolute;
   top: 1.5rem;
