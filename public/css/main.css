@@ -1,7 +1,13 @@
-.btn svg {
+.btn .icon {
+  display: inline-block;
   width: 40px;
   height: auto; }
-  .btn svg * {
+.btn svg,
+.btn svg * {
+  width: 100%;
+  height: auto; }
+  .btn svg *,
+  .btn svg * * {
     fill: white;
     width: 100%;
     height: auto; }
