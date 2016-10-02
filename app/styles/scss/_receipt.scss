@@ -12,15 +12,15 @@ $paper-margin: 18px;
     right: 1rem;
 
     @media screen {
-      top: $gap-border + 1.5rem;
+      // top: $gap-border + 1.5rem;
     }
 
   }
 
   &_body {
     position: absolute;
-    top: 16rem;
-    left: 0;
+    top: 120px;
+    left: 90px;
     right: 0;
   }
 
@@ -43,19 +43,41 @@ $paper-margin: 18px;
     @media screen {
 
       &:not(:first-child) {
-        margin-top: $gap-border;
-        padding-top: $gap-border;
-        border-top: 3px dashed #dcdcdc;
+        margin-top: 100px;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 100px;
+
+        &:after {
+          content: "";
+          position: absolute;
+          bottom: -50px;
+          left: 0;
+          right: 0;
+          border-bottom: 2px dashed rgba(0, 0, 0, 0.2);
+        }
+
       }
 
     }
+
+    // @media screen {
+    //
+    //   &:not(:first-child) {
+    //     margin-top: $gap-border;
+    //     padding-top: $gap-border;
+    //     border-top: 3px dashed #dcdcdc;
+    //   }
+    //
+    // }
 
   }
 
   &_company {
 
     position: absolute;
-    top: 0;
+    top: 55px;
     right: 0;
 
     h1 {
@@ -71,25 +93,26 @@ $paper-margin: 18px;
   &_customer {
 
     &_order {
-      // text-align: center;
-      font-size: 4em;
+      font-size: 5em;
       font-weight: bold;
-      margin-top: 0.5em;
+      margin-top: 0.3em;
+      line-height: 1;
     }
 
   }
 
   &_description {
-    font-size: 2.5em;
-    margin-bottom: 0.2em;
+    font-size: 50px;
+    margin-bottom: 0;
 
     &_type {
       display: inline-block;
-      width: 7.5em;
+      width: 6.5em;
     }
 
     &_value {
       display: inline-block;
+      font-weight: bold;
     }
 
   }
@@ -106,7 +129,7 @@ $paper-margin: 18px;
       &-side {
         position: absolute;
         top: 70%;
-        width: 30%;
+        width: 25%;
         margin: auto 0;
         right: 1.5rem;
         transform-origin: top right;
@@ -124,7 +147,7 @@ $paper-margin: 18px;
       }
 
       .receipt_barcode_wrapper-side & {
-        min-height: 40px;
+        min-height: 25px;
       }
 
     }
@@ -132,17 +155,20 @@ $paper-margin: 18px;
     &_code {
       display: block;
       font-size: 1.5em;
-      letter-spacing: 0.6em;
+      text-align: center;
 
-      @media print {
-        // font-size: 8pt;
+      .receipt_header & {
+        letter-spacing: 12px;
       }
 
-      text-align: center;
+      .receipt_footer & {
+        letter-spacing: 17px;
+      }
 
       .receipt_barcode_wrapper-side & {
         font-size: 6pt;
         margin-top: 3pt;
+        letter-spacing: 4px;
       }
 
     }
