@@ -4,7 +4,8 @@
   height: 200px;
   margin-bottom: 2rem;
   z-index: 2;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #f1f1f1;
+  border: 2px dashed rgba(0, 0, 0, 0.1);
 
   &_text {
     position: absolute;

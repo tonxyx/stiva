@@ -1,7 +1,13 @@
-.btn svg {
+.btn .icon {
+  display: inline-block;
   width: 40px;
   height: auto; }
-  .btn svg * {
+.btn svg,
+.btn svg * {
+  width: 100%;
+  height: auto; }
+  .btn svg *,
+  .btn svg * * {
     fill: white;
     width: 100%;
     height: auto; }
@@ -16,7 +22,8 @@
   height: 200px;
   margin-bottom: 2rem;
   z-index: 2;
-  background-color: rgba(0, 0, 0, 0.1); }
+  background-color: #f1f1f1;
+  border: 2px dashed rgba(0, 0, 0, 0.1); }
   .form-file_text {
     position: absolute;
     top: 0;
@@ -55,13 +62,10 @@ input[type=file] {
   top: 1.5rem;
   left: 0;
   right: 1rem; }
-  @media screen {
-    .receipt_header {
-      top: 5.5rem; } }
 .receipt_body {
   position: absolute;
-  top: 16rem;
-  left: 0;
+  top: 120px;
+  left: 90px;
   right: 0; }
 .receipt_footer {
   position: absolute;
@@ -76,12 +80,19 @@ input[type=file] {
       page-break-inside: avoid; } }
   @media screen {
     .receipt_item:not(:first-child) {
-      margin-top: 4rem;
-      padding-top: 4rem;
-      border-top: 3px dashed #dcdcdc; } }
+      margin-top: 100px; }
+    .receipt_item:not(:last-child) {
+      margin-bottom: 100px; }
+      .receipt_item:not(:last-child):after {
+        content: "";
+        position: absolute;
+        bottom: -50px;
+        left: 0;
+        right: 0;
+        border-bottom: 2px dashed rgba(0, 0, 0, 0.2); } }
 .receipt_company {
   position: absolute;
-  top: 0;
+  top: 55px;
   right: 0; }
   .receipt_company h1 {
     text-transform: uppercase;
@@ -91,17 +102,19 @@ input[type=file] {
       .receipt_company h1 {
         font-size: 25pt; } }
 .receipt_customer_order {
-  font-size: 4em;
+  font-size: 5em;
   font-weight: bold;
-  margin-top: 0.5em; }
+  margin-top: 0.3em;
+  line-height: 1; }
 .receipt_description {
-  font-size: 2.5em;
-  margin-bottom: 0.2em; }
+  font-size: 50px;
+  margin-bottom: 0; }
   .receipt_description_type {
     display: inline-block;
-    width: 7.5em; }
+    width: 6.5em; }
   .receipt_description_value {
-    display: inline-block; }
+    display: inline-block;
+    font-weight: bold; }
 .receipt_barcode_wrapper {
   width: 582px; }
   .receipt_footer .receipt_barcode_wrapper {
@@ -109,7 +122,7 @@ input[type=file] {
   .receipt_barcode_wrapper-side {
     position: absolute;
     top: 70%;
-    width: 30%;
+    width: 25%;
     margin: auto 0;
     right: 1.5rem;
     transform-origin: top right;
@@ -120,15 +133,19 @@ input[type=file] {
   .receipt_footer .receipt_barcode_image {
     min-height: 90px; }
   .receipt_barcode_wrapper-side .receipt_barcode_image {
-    min-height: 40px; }
+    min-height: 25px; }
 .receipt_barcode_code {
   display: block;
   font-size: 1.5em;
-  letter-spacing: 0.6em;
   text-align: center; }
+  .receipt_header .receipt_barcode_code {
+    letter-spacing: 12px; }
+  .receipt_footer .receipt_barcode_code {
+    letter-spacing: 17px; }
   .receipt_barcode_wrapper-side .receipt_barcode_code {
     font-size: 6pt;
-    margin-top: 3pt; }
+    margin-top: 3pt;
+    letter-spacing: 4px; }
 
 @page {
   size: A5 landscape;

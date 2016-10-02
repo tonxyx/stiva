@@ -1,80 +1,125 @@
 <?php echo $this->getContent();
 
 if (isset($printData)) { ?>
-  <table class="table table-bordered table-stripped">
-    <tr>
-      <td>
-        <table>
-          <tr>
-            <td><img src="<?php echo $printData['barcodeCode']; ?>"></td>
-            <td><h2>Drvenjaca</h2></td>
-          </tr>
-          <tr>
-            <td>*<?php echo $printData['barcode']; ?>*</td>
-          </tr>
-          <tr>
-            <td><strong>Tip palete:</strong></td>
-            <td><?php echo $printData['type']; ?></td>
-          </tr>
-          <tr>
-            <td><strong>Format:</strong></td>
-            <td><?php echo $printData['width'] . ' x ' . $printData['length']; ?></td>
-          </tr>
-          <tr>
-            <td><strong>Niz/št.enot:</strong></td>
-            <td><?php echo $printData['orderNo']; ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $printData['customerOrder']; ?></td>
-          </tr>
-          <tr>
-            <td><img src="<?php echo $printData['barcodeCode']; ?>"></td>
-          </tr>
-          <tr>
-            <td>*<?php echo $printData['barcode']; ?>*</td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-print btn-lg btn-primary pull-right" onClick="window.print()"><svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="24" height="24" viewBox="0 0 24 24"><path d="M16 17h-8v-1h8v1zm8-12v13h-4.048c-.404 2.423-3.486 6-6.434 6h-9.518v-6h-4v-13h4v-5h16v5h4zm-18 0h12v-3h-12v3zm12 9h-12v8h6.691c3.469 0 2-3.352 2-3.352s3.309 1.594 3.309-2v-2.648zm4-7h-20v9h2v-4h16v4h2v-9zm-9 11h-5v1h5v-1zm7.5-10c-.276 0-.5.224-.5.5s.224.5.5.5.5-.224.5-.5-.224-.5-.5-.5z"/></svg>
+        <br>Print</button>
+      <div class="clearfix"></div>
+      <hr>
+    </div>
+  </div>  
+
+  <div class="receipt_wrapper">
+    <section class="receipt_item">
+
+      <div class="receipt_header">
+        <div class="receipt_company">
+          <h1>Drvenjača</h1>
+        </div>
+
+        <div class="receipt_barcode_wrapper">
+          <img class="receipt_barcode_image" src="<?php echo $printData['barcodeCode']; ?>">
+          <span class="receipt_barcode_code">*<?php echo $printData['barcode']; ?>*</span>
+        </div>
+      </div>
+
+      <div class="receipt_body">
+        <dl class="receipt_description">
+          <dt class="receipt_description_type"><strong>Tip palete:</strong></dt>
+          <dd class="receipt_description_value"><?php echo $printData['type']; ?></dd>
+        </dl>
+        <dl class="receipt_description">
+          <dt class="receipt_description_type"><strong>Format:</strong></dt>
+          <dd class="receipt_description_value"><?php echo $printData['width'] . ' x ' . $printData['length']; ?></dd>
+        </dl>
+        <dl class="receipt_description">
+          <dt class="receipt_description_type"><strong>Niz/št.enot:</strong></dt>
+          <dd class="receipt_description_value"><?php echo $printData['orderNo']; ?></dd>
+        </dl>
+        <div class="receipt_customer_order"><?php echo $printData['customerOrder']; ?></div>
+      </div>
+
+      <div class="receipt_footer">
+        <div class="receipt_barcode_wrapper">
+          <img class="receipt_barcode_image" src="<?php echo $printData['barcodeCode']; ?>">
+          <span class="receipt_barcode_code">*<?php echo $printData['barcode']; ?>*</span>
+        </div>
+      </div>
+
+      <div class="receipt_barcode_wrapper-side">
+        <img class="receipt_barcode_image" src="<?php echo $printData['barcodeCode']; ?>">
+        <span class="receipt_barcode_code">*<?php echo $printData['barcode']; ?>*</span>
+      </div>
+
+    </section>
+  </div>
+
 <?php } else {
   echo $this->tag->form(['export/index', 'method' => 'post']); ?>
 
-  <div class="form-group">
-    <label for="<?php echo $form->get('barcode')->getName(); ?>"><?php echo $form->get('barcode')->getLabel(); ?></label>
-    <?php echo $form->render('barcode', ['class' => 'form-control']); ?>
-    <small class="form-text text-muted text-danger">
-      Write barcode surrounded without "*", just as a plain string (1-0547157-01-2-001-172)
-    </small>
+<div class="row">
+
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="<?php echo $form->get('barcode')->getName(); ?>"><?php echo $form->get('barcode')->getLabel(); ?></label>
+      <?php echo $form->render('barcode', ['class' => 'form-control']); ?>
+      <small class="form-text text-muted text-danger">
+        Write barcode surrounded without "*", just as a plain string (1-0547157-01-2-001-172)
+      </small>
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="<?php echo $form->get('type')->getName(); ?>"><?php echo $form->get('type')->getLabel(); ?></label>
-    <?php echo $form->render('type', ['class' => 'form-control']); ?>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="<?php echo $form->get('type')->getName(); ?>"><?php echo $form->get('type')->getLabel(); ?></label>
+      <?php echo $form->render('type', ['class' => 'form-control']); ?>
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="<?php echo $form->get('width')->getName(); ?>"><?php echo $form->get('width')->getLabel(); ?></label>
-    <?php echo $form->render('width', ['class' => 'form-control']); ?>
+</div>
+
+<div class="row">
+
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="<?php echo $form->get('width')->getName(); ?>"><?php echo $form->get('width')->getLabel(); ?></label>
+      <?php echo $form->render('width', ['class' => 'form-control']); ?>
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="<?php echo $form->get('length')->getName(); ?>"><?php echo $form->get('length')->getLabel(); ?></label>
-    <?php echo $form->render('length', ['class' => 'form-control']); ?>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="<?php echo $form->get('length')->getName(); ?>"><?php echo $form->get('length')->getLabel(); ?></label>
+      <?php echo $form->render('length', ['class' => 'form-control']); ?>
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="<?php echo $form->get('orderNo')->getName(); ?>"><?php echo $form->get('orderNo')->getLabel(); ?></label>
-    <?php echo $form->render('orderNo', ['class' => 'form-control']); ?>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="<?php echo $form->get('orderNo')->getName(); ?>"><?php echo $form->get('orderNo')->getLabel(); ?></label>
+      <?php echo $form->render('orderNo', ['class' => 'form-control']); ?>
+    </div>
   </div>
-
-  <div class="form-group">
-    <label for="<?php echo $form->get('customerOrder')->getName(); ?>">
-      <?php echo $form->get('customerOrder')->getLabel(); ?></label>
-    <?php echo $form->render('customerOrder', ['class' => 'form-control']); ?>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="<?php echo $form->get('customerOrder')->getName(); ?>">
+        <?php echo $form->get('customerOrder')->getLabel(); ?></label>
+      <?php echo $form->render('customerOrder', ['class' => 'form-control']); ?>
+    </div>
   </div>
+</div>
 
-  <button type="submit" class="btn btn-success">Submit</button>
+<div class="row">
+  <div class="col-md-3">
+    <button type="submit" class="btn btn-lg btn-block btn-success">Export</button>
+  </div>
+</div>
 
-  <?php echo $this->tag->endForm();
+<?php echo $this->tag->endForm();
+
 }
