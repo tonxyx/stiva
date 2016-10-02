@@ -3,7 +3,32 @@ $paper-margin: 18px;
 
 .receipt {
 
-  &_wrapper {}
+  &_wrapper {
+
+    @media screen {
+      position: relative;
+
+      &:not(:first-child) {
+        margin-top: 100px;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 100px;
+
+        &:after {
+          content: "";
+          position: absolute;
+          bottom: -50px;
+          left: 0;
+          right: 0;
+          border-bottom: 2px dashed rgba(0, 0, 0, 1);
+        }
+
+      }
+
+    }
+
+  }
 
   &_header {
     position: absolute;
