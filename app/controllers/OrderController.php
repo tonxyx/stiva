@@ -72,9 +72,8 @@ class OrderController extends ControllerBase {
   public function detailsAction ($id) {
     $items = Items::find([
         "parent_order = {$id}",
-        'order' => 'customer_order ASC',
-        'order' => 'width DESC',
-        // 'order' => 'length ASC',
+        // 'order' => 'customer_order ASC',
+        // 'order' => 'width DESC',
     ])->toArray();
 
     $this->view->items = $this->sortArrayByArray($items, $this->fixture['sortOrder']);
@@ -83,8 +82,8 @@ class OrderController extends ControllerBase {
   public function manageAction ($id) {
     $items = Items::find([
         "parent_order = {$id}",
-        'order' => 'customer_order ASC',
-        'order' => 'width DESC',
+        // 'order' => 'customer_order ASC',
+        // 'order' => 'width DESC',
     ]);
 
     $managedData = [];

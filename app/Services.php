@@ -66,7 +66,7 @@ class Services extends \Base\Services {
         '30' => [40],
         '33' => [40],
       ],
-      'sortOrder' => [10, 60, 2, 78, 6, 40, 30, 33],
+      'sortOrder' => [10, 60, 2, 78, 62, 67, 90, 51, 6, 40, 49, 52, 30, 33],
       'coverTypes' => [30, 33],
     ];
 

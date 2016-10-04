@@ -126,7 +126,7 @@ class ExportController extends ControllerBase {
 
         if ($itemPackage->total_leftover_quantity) {
           $max = $itemPackage->primary_no > $itemPackage->secondary_no ?
-            $itemPackage->primary_no : ($itemPackage->secondary_no == 1 ? 2 : $itemPackage->secondary_no);
+            $itemPackage->primary_no : ($itemPackage->secondary_no == 1 ? 1 : $itemPackage->secondary_no);
 
           $barcodeLeftover = substr_replace($item->barcode, str_pad(++$max, 3, '0', STR_PAD_LEFT) .
             '-' . str_pad($itemPackage->total_leftover_quantity, 3, '0', STR_PAD_LEFT), -7);
@@ -176,8 +176,8 @@ class ExportController extends ControllerBase {
   public function exportAction ($order) {
     $orderItems = Items::find([
       "parent_order=$order",
-      'order' => 'customer_order ASC',
-      'order' => 'width DESC',
+      // 'order' => 'customer_order ASC',
+      // 'order' => 'width DESC',
     ]);
 
     $orderData = [];
@@ -185,7 +185,7 @@ class ExportController extends ControllerBase {
       $orderData[] = $this->prepareItemDataForPrint($orderItem);
     }
 
-    $this->view->orderData = $this->sortArrayByArray($orderData, $this->fixture['sortOrder']);
-    // $this->view->orderData = $orderData;
+    // $this->view->orderData = $this->sortArrayByArray($orderData, $this->fixture['sortOrder']);
+    $this->view->orderData = $orderData;
   }
 }
