@@ -64,7 +64,6 @@ CREATE TABLE `packages` (
   `secondary_quantity` int(20) unsigned default 0,
   `total_quantity` int(20) unsigned NOT NULL,
   `total_leftover_quantity` int(20) unsigned NOT NULL,
-  `packing_info` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `item_id` (`item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

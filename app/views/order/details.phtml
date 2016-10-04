@@ -21,21 +21,21 @@
   <tbody>
     <?php foreach ($items as $item) { ?>
       <tr>
-        <td><?php echo $item->group; ?></td>
-        <td><?php echo $item->order_id; ?></td>
-        <td><?php echo $item->pal_cov; ?></td>
-        <td><?php echo $item->date; ?></td>
-        <td><?php echo $item->customer_order; ?></td>
-        <td><?php echo $item->type; ?></td>
-        <td><?php echo $item->set; ?></td>
-        <td><?php echo $item->quantity; ?></td>
-        <td><?php echo $item->width; ?></td>
-        <td><?php echo $item->length; ?></td>
-        <td><?php echo $item->barcode; ?></td>
-        <td><?php echo $item->delivery_date; ?></td>
+        <td><?php echo $item['group']; ?></td>
+        <td><?php echo $item['order_id']; ?></td>
+        <td><?php echo $item['pal_cov']; ?></td>
+        <td><?php echo $item['date']; ?></td>
+        <td><?php echo $item['customer_order']; ?></td>
+        <td><?php echo $item['type']; ?></td>
+        <td><?php echo $item['set']; ?></td>
+        <td><?php echo $item['quantity']; ?></td>
+        <td><?php echo $item['width']; ?></td>
+        <td><?php echo $item['length']; ?></td>
+        <td><?php echo $item['barcode']; ?></td>
+        <td><?php echo $item['delivery_date']; ?></td>
         <td>
-          <?php echo $this->tag->linkTo(['export/exportSingle/' . $item->id, ' Export', 'class' => 'btn btn-success'])
-          ; ?>
+          <?php echo $this->tag->linkTo(['export/exportSingle/' .
+            $item['id'], ' Export', 'class' => 'btn btn-success']); ?>
         </td>
       </tr>
     <?php } ?>

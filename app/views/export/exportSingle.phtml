@@ -28,7 +28,15 @@ if ($printData) { ?>
 
         <div class="receipt_body">
           <dl class="receipt_description">
-            <dt class="receipt_description_type"><strong>Tip palete:</strong></dt>
+            <dt class="receipt_description_type">
+              <strong>
+                <?php if (in_array($printData['type'], $this->fixture['coverTypes'])) { ?>
+                  Tip pokrova:
+                <?php } else { ?>
+                  Tip palete:
+                <?php } ?>
+              </strong>
+            </dt>
             <dd class="receipt_description_value"><?php echo $printData['type']; ?></dd>
           </dl>
           <dl class="receipt_description">

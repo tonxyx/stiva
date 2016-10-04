@@ -8,10 +8,12 @@ class ControllerBase extends Controller {
     $this->tag->prependTitle('STIVA | ');
     $this->view->setTemplateAfter('main');
     $this->assets->addCss('css/bootstrap.min.css')
-      ->addCss('css/main.css');
+      ->addCss('css/main.css')
+      ->addCss('css/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css');
     $this->assets->addJs('js/jquery.min.js')
       ->addJs('js/bootstrap.min.js')
-      ->addJs('js/utils.js');
+      ->addJs('js/utils.js')
+      ->addJs('js/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js');
   }
 
   protected function forward ($uri) {
@@ -24,5 +26,27 @@ class ControllerBase extends Controller {
         'params' => $params,
       ]
     );
+  }
+
+  /**
+   * Sort array by param by example array order
+   *
+   * @param array $array
+   * @param array $orderArray
+   * @param string $type
+   *
+   * @return array
+   */
+  protected function sortArrayByArray (array $array, array $orderArray, $param = 'type') {
+      $ordered = array();
+      foreach ($orderArray as $sortKey) {
+        foreach ($array as $key => $value) {
+          if ($sortKey == $value[$param]) {
+              $ordered[$key] = $value;
+              unset($array[$key]);
+          }
+        }
+      }
+      return $ordered + $array;
   }
 }

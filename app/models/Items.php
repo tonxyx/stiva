@@ -131,14 +131,18 @@ class Items extends Model {
       $package->total_quantity = $calculationData['totalQuantity'] = $calculationData['primaryQuantity'];
       $package->total_leftover_quantity = $calculationData['totalLeftoverQuantity'] = $item->quantity -
         $calculationData['totalQuantity'];
-
-      $package->packing_info = $calculationData['packingInfo'] = sprintf('%d * %d + %d',
-        $calculationData['primaryNo'], $typePackingParams[0], $calculationData['primaryLeftoverQuantity']);
     } else {
       $packingParamsSum = $typePackingParams[0] + $typePackingParams[1];
-      $package->primary_no = $calculationData['primaryNo'] = intval($item->quantity/$packingParamsSum);
+
+      // first type param should be primarily populated
+      if ($packingParamsSum > $item->quantity && $item->quantity > $typePackingParams[0]) {
+        $package->primary_no = $calculationData['primaryNo'] = 1;
+      } else {
+        $package->primary_no = $calculationData['primaryNo'] = intval($item->quantity/$packingParamsSum);
+      }
+
       $package->primary_quantity = $calculationData['primaryQuantity'] = $calculationData['primaryNo'] *
-        $typePackingParams[0];
+      $typePackingParams[0];
       $package->primary_leftover_quantity = $calculationData['primaryLeftoverQuantity'] = $item->quantity -
         $calculationData['primaryQuantity'];
 
@@ -150,9 +154,6 @@ class Items extends Model {
         $calculationData['secondaryQuantity'];
       $package->total_leftover_quantity = $calculationData['totalLeftoverQuantity'] = $item->quantity -
         $calculationData['totalQuantity'];
-
-      $package->packing_info = $calculationData['packingInfo'] = sprintf('%d * %d + %d * %d',
-        $calculationData['primaryNo'], $typePackingParams[0],  $calculationData['secondaryNo'], $typePackingParams[1]);
     }
 
     if (!$package->save()) {

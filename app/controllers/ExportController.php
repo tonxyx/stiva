@@ -31,27 +31,6 @@ class ExportController extends ControllerBase {
     $this->view->form = $form;
   }
 
-  public function detailsAction ($id) {
-    $this->view->items = Items::find("parent_order=$id");
-  }
-
-  public function manageAction ($id) {
-    $items = Items::find("parent_order=$id");
-
-    $managedData = [];
-    foreach ($items as $item) {
-      $managedData[$item->id] = [
-        'customer_order' => $item->customer_order,
-        'type' => $item->type,
-        'quantity' => $item->quantity,
-        'barcode' => $item->barcode,
-        'calculationData' => Packages::find("item_id=$item->id")->toArray()[0],
-      ];
-    }
-
-    $this->view->managedData = $managedData;
-  }
-
   /**
    * Export single item printing blocks
    *
@@ -195,13 +174,18 @@ class ExportController extends ControllerBase {
    * @param $order
    */
   public function exportAction ($order) {
-    $orderItems = Items::find("parent_order=$order");
+    $orderItems = Items::find([
+      "parent_order=$order",
+      'order' => 'customer_order ASC',
+      'order' => 'width DESC',
+    ]);
 
     $orderData = [];
     foreach ($orderItems as $orderItem) {
       $orderData[] = $this->prepareItemDataForPrint($orderItem);
     }
 
-    $this->view->orderData = $orderData;
+    $this->view->orderData = $this->sortArrayByArray($orderData, $this->fixture['sortOrder']);
+    // $this->view->orderData = $orderData;
   }
 }

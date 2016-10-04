@@ -14,13 +14,20 @@
 
     <?php $this->assets->outputJs(); ?>
 
-<!-- todo: fix -->
-<script>
-  $('#order').on('change', function () {
-    $('.form-file_value').text($(this).val());
-  });
-</script>
+    <!-- todo: fix -->
+    <script>
+      $('#order').on('change', function () {
+        $('.form-file_value').text($(this).val());
+      });
+    </script>
 
-
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('[data-editable]').editable({
+          url: $('[data-editable-url]').data('editable-url'),
+          title: 'Enter new value',
+        });
+      });
+    </script>
   </body>
 </html>

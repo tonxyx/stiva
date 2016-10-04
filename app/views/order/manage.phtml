@@ -1,5 +1,10 @@
 <?php echo $this->getContent(); ?>
 
+<div class="alert alert-success">
+  <strong>All data and leftover items are editable. Just click on it and popup will be opened.
+    After edit confirm save.</strong>
+</div>
+
 <table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
@@ -7,7 +12,8 @@
       <td>Type</td>
       <td>Quantity</td>
       <td>Barcode</td>
-      <td colspan="2">Data</td>
+      <td>Data</td>
+      <td>Leftover</td>
       <td>Actions</td>
     </tr>
   </thead>
@@ -18,8 +24,28 @@
         <td><?php echo $item['type']; ?></td>
         <td><?php echo $item['quantity']; ?></td>
         <td><?php echo $item['barcode']; ?></td>
-        <td><?php echo $item['calculationData']['packing_info']; ?></td>
-        <td><?php echo $item['calculationData']['total_leftover_quantity']; ?></td>
+        <td data-editable-url="<?php echo $this->url->get('order/updatePackageData'); ?>">
+          <?php if (isset($this->fixture['types'][$item['type']][1])) { ?>
+            <span data-editable data-pk="<?php echo $itemKey . '_primary'; ?>">
+              <?php echo $item['calculationData']['primary_no']; ?>
+            </span>*
+              <?php echo $this->fixture['types'][$item['type']][0]; ?> +
+            <span data-editable data-pk="<?php echo $itemKey . '_secondary'; ?>">
+              <?php echo $item['calculationData']['secondary_no']; ?>
+            </span>*
+            <?php echo $this->fixture['types'][$item['type']][1];
+          } else { ?>
+            <span data-editable data-pk="<?php echo $itemKey . '_primary'; ?>">
+              <?php echo $item['calculationData']['primary_no']; ?>
+            </span>*
+            <?php echo $this->fixture['types'][$item['type']][0];
+          } ?>
+        </td>
+        <td>
+          <span data-editable data-pk="<?php echo $itemKey . '_leftover'; ?>">
+            <?php echo $item['calculationData']['total_leftover_quantity']; ?>
+          </span>
+        </td>
         <td>
           <?php echo $this->tag->linkTo([
             'export/exportSingle/' . $itemKey, ' Export', 'class' => 'btn btn-success'

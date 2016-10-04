@@ -53,11 +53,6 @@ class Packages extends Model {
   public $total_leftover_quantity;
 
   /**
-   * @var string
-   */
-  public $packing_info;
-
-  /**
    * Orders initializer
    */
   public function initialize () {
