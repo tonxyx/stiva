@@ -30,7 +30,8 @@ class OrderController extends ControllerBase {
         $this->request->getUploadedFiles()[0]->getSize() > 0) {
       if ($form->isValid($this->request->getPost())) {
         foreach ($this->request->getUploadedFiles() as $file) {
-          $fileName = date('Y-m-d') . '_' . $file->getName();
+          // $fileName = date('Y-m-d') . '_' . $file->getName();
+          $fileName = $file->getName();
           $filePath = $this->config->application->docsLink . $fileName;
 
           $file->moveTo($filePath);

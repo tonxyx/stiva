@@ -9,11 +9,12 @@ class ControllerBase extends Controller {
     $this->view->setTemplateAfter('main');
     $this->assets->addCss('css/bootstrap.min.css')
       ->addCss('css/main.css')
-      ->addCss('css/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css');
+      ->addCss('js/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css');
     $this->assets->addJs('js/jquery.min.js')
       ->addJs('js/bootstrap.min.js')
       ->addJs('js/utils.js')
-      ->addJs('js/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js');
+      ->addJs('js/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js')
+      ->addJs('js/jquery-sortable.js');
   }
 
   protected function forward ($uri) {

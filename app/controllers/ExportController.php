@@ -185,6 +185,7 @@ class ExportController extends ControllerBase {
       $orderData[] = $this->prepareItemDataForPrint($orderItem);
     }
 
+    // todo
     // $this->view->orderData = $this->sortArrayByArray($orderData, $this->fixture['sortOrder']);
     $this->view->orderData = $orderData;
   }
