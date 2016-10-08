@@ -87,16 +87,6 @@ $paper-margin: 18px;
 
     }
 
-    // @media screen {
-    //
-    //   &:not(:first-child) {
-    //     margin-top: $gap-border;
-    //     padding-top: $gap-border;
-    //     border-top: 3px dashed #dcdcdc;
-    //   }
-    //
-    // }
-
   }
 
   &_company {
@@ -138,6 +128,8 @@ $paper-margin: 18px;
     &_value {
       display: inline-block;
       font-weight: bold;
+      text-align: center;
+      width: 280px;      
     }
 
   }
@@ -145,7 +137,7 @@ $paper-margin: 18px;
   &_barcode {
 
     &_wrapper {
-      width: 600px - $paper-margin;
+      width: 600px;
 
       .receipt_footer & {
         width: 700px;
@@ -154,7 +146,7 @@ $paper-margin: 18px;
       &-side {
         position: absolute;
         top: 70%;
-        width: 25%;
+        width: 22%;
         margin: auto 0;
         right: 1.5rem;
         transform-origin: top right;
@@ -172,7 +164,7 @@ $paper-margin: 18px;
       }
 
       .receipt_barcode_wrapper-side & {
-        min-height: 25px;
+        min-height: 22px;
       }
 
     }
@@ -193,7 +185,7 @@ $paper-margin: 18px;
       .receipt_barcode_wrapper-side & {
         font-size: 6pt;
         margin-top: 3pt;
-        letter-spacing: 4px;
+        letter-spacing: 3px;
       }
 
     }

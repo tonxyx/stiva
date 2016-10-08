@@ -8,8 +8,9 @@ class ControllerBase extends Controller {
     $this->tag->prependTitle('STIVA | ');
     $this->view->setTemplateAfter('main');
     $this->assets->addCss('css/bootstrap.min.css')
-      ->addCss('css/main.css')
-      ->addCss('js/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css');
+      ->addCss('css/jquery-sortable.css')
+      ->addCss('js/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css')
+      ->addCss('css/main.css');
     $this->assets->addJs('js/jquery.min.js')
       ->addJs('js/bootstrap.min.js')
       ->addJs('js/utils.js')

@@ -12,9 +12,23 @@
     width: 100%;
     height: auto; }
 .btn-print {
-  min-width: 200px; }
+  min-height: 100px; }
   .btn-print svg {
     width: 20px; }
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1; }
+  .lead .icon {
+    width: 24px;
+    height: auto; }
+  .icon svg {
+    width: 100%;
+    height: auto;
+    fill: black; }
+    .text-info .icon svg {
+      fill: #31708f; }
 
 .form-file {
   position: relative;
@@ -106,7 +120,7 @@ input[type=file] {
         border-bottom: 2px dashed rgba(0, 0, 0, 0.2); } }
 .receipt_company {
   position: absolute;
-  top: 27px;
+  top: 55px;
   right: 0; }
   .receipt_company h1 {
     text-transform: uppercase;
@@ -127,12 +141,12 @@ input[type=file] {
     display: inline-block;
     width: 6.5em; }
   .receipt_description_value {
-    text-align: center;
-    width: 280px;
     display: inline-block;
-    font-weight: bold; }
+    font-weight: bold;
+    text-align: center;
+    width: 280px; }
 .receipt_barcode_wrapper {
-  width: 522px; }
+  width: 600px; }
   .receipt_footer .receipt_barcode_wrapper {
     width: 700px; }
   .receipt_barcode_wrapper-side {
@@ -155,13 +169,44 @@ input[type=file] {
   font-size: 1.5em;
   text-align: center; }
   .receipt_header .receipt_barcode_code {
-    letter-spacing: 10px; }
+    letter-spacing: 12px; }
   .receipt_footer .receipt_barcode_code {
     letter-spacing: 17px; }
   .receipt_barcode_wrapper-side .receipt_barcode_code {
     font-size: 6pt;
     margin-top: 3pt;
     letter-spacing: 3px; }
+
+.navbar-brand {
+  background-image: url("../media/logo_600.svg");
+  background-repeat: no-repeat;
+  background-size: 50px;
+  background-position: center;
+  text-indent: -9999px;
+  width: 50px;
+  margin-left: 0 !important; }
+
+span.editable-container.editable-inline {
+  position: absolute;
+  bottom: 100%;
+  left: -1em;
+  z-index: 1;
+  background: white;
+  padding: 1em;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); }
+
+.table > tbody > tr > td {
+  position: relative; }
+
+.table > thead > tr > th:last-child,
+.table > tbody > tr > td:last-child {
+  text-align: center; }
+
+.lead-has-icon {
+  margin-left: 30px; }
+  .lead-has-icon .icon {
+    margin-left: -30px; }
 
 @page {
   size: A5 landscape;

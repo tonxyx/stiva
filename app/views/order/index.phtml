@@ -3,11 +3,11 @@
 <table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
-      <td>Name</td>
-      <td>File name</td>
-      <td>Upload date</td>
-      <td>Delivery date</td>
-      <td colspan="3">Actions</td>
+      <th>Name</th>
+      <th>File name</th>
+      <th>Upload date</th>
+      <th>Delivery date</th>
+      <th colspan="3">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -18,9 +18,9 @@
       <td><?php echo date('d.m.Y', strtotime($item->upload_date)); ?></td>
       <td><?php echo $item->delivery_date; ?></td>
       <td colspan="3">
-        <?php echo $this->tag->linkTo(['order/details/' . $item->id, 'Details', 'class' => 'btn btn-default']); ?>
-        <?php echo $this->tag->linkTo(['order/manage/' . $item->id, ' Manage', 'class' => 'btn btn-primary']); ?>
-        <?php echo $this->tag->linkTo(['export/export/' . $item->id, ' Export', 'class' => 'btn btn-success']); ?>
+        <?php echo $this->tag->linkTo(['order/details/' . $item->id, 'Details', 'class' => 'btn btn-xs btn-default']); ?>
+        <?php echo $this->tag->linkTo(['order/manage/' . $item->id, ' Manage', 'class' => 'btn btn-xs btn-primary']); ?>
+        <?php echo $this->tag->linkTo(['export/export/' . $item->id, ' Export', 'class' => 'btn btn-xs btn-success']); ?>
       </td>
     </tr>
   <?php } ?>

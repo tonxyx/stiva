@@ -10,7 +10,7 @@ use Phalcon\Mvc\User\Component;
 class Elements extends Component {
 
   private $_headerMenu = [
-    'navbar-left' => [
+    'navbar-right' => [
       'index' => [
         'caption' => 'Home',
         'action' => 'index',

@@ -1,22 +1,10 @@
 @import "btn";
+@import "icon";
 @import "form";
 @import "receipt";
+@import "navbar";
+@import "editable";
+@import "table";
+@import "lead";
 
-// PRINT STYLES
-
-@page {
-  size: A5 landscape;
-  margin: 0.5cm;
-  page-break-after: always;
-}
-
-@media print {
-
-  .btn,
-  nav,
-  footer,
-  hr {
-    display: none;
-  }
-
-}
+@import "print-page";
