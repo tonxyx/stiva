@@ -1,0 +1,9 @@
+.table>tbody>tr>td {
+  position: relative;
+}
+
+
+.table > thead > tr > th:last-child,
+.table > tbody > tr > td:last-child {
+  text-align: center;
+}

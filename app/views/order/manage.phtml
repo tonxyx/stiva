@@ -1,20 +1,21 @@
 <?php echo $this->getContent(); ?>
 
-<div class="alert alert-success">
-  <strong>All data and leftover items are editable. Just click on it and popup will be opened.
-    After edit confirm save.</strong>
-</div>
+<p class="lead lead-has-icon text-info text-sm">
+  <i class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01c.564-1.789 1.632-3.932 1.821-4.474.273-.787-.211-1.136-1.74.209l-.34-.64c1.744-1.897 5.335-2.326 4.113.613-.763 1.835-1.309 3.074-1.621 4.03-.455 1.393.694.828 1.819-.211.153.25.203.331.356.619-2.498 2.378-5.271 2.588-4.408-.146zm4.742-8.169c-.532.453-1.32.443-1.761-.022-.441-.465-.367-1.208.164-1.661.532-.453 1.32-.442 1.761.022.439.466.367 1.209-.164 1.661z"/></svg></i>
+  All <strong>data</strong> and <strong>leftover</strong> items are editable. Just click on it and popup will be open. After edit confirm save. <br>
+  Rows are draggable. Press and hold on row to move it up/down.
+</p>
 
-<table class="table table-bordered table-striped table-hover" data-sortable-table>
+<table class="table table-bordered table-striped table-hover table-sortable" data-sortable-table>
   <thead>
     <tr>
-      <td>Customer order</td>
-      <td>Type</td>
-      <td>Quantity</td>
-      <td>Barcode</td>
-      <td>Data</td>
-      <td>Leftover</td>
-      <td>Actions</td>
+      <th>Customer order</th>
+      <th>Type</th>
+      <th>Quantity</th>
+      <th>Barcode</th>
+      <th>Data</th>
+      <th>Leftover</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -48,7 +49,7 @@
         </td>
         <td>
           <?php echo $this->tag->linkTo([
-            'export/exportSingle/' . $itemKey, ' Export', 'class' => 'btn btn-success'
+            'export/exportSingle/' . $itemKey, ' Export', 'class' => 'btn btn-xs btn-success'
           ]); ?>
         </td>
       </tr>

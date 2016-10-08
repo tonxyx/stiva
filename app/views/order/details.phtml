@@ -3,19 +3,19 @@
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
-      <td>Group</td>
-      <td>Order ID</td>
-      <td>Pal cov</td>
-      <td>Date</td>
-      <td>Customer order</td>
-      <td>Type</td>
-      <td>Set</td>
-      <td>Quantity</td>
-      <td>Width</td>
-      <td>Length</td>
-      <td>Barcode</td>
-      <td>Delivery date</td>
-      <td>Actions</td>
+      <th>Group</th>
+      <th>Order ID</th>
+      <th>Pal cov</th>
+      <th>Date</th>
+      <th>Customer order</th>
+      <th>Type</th>
+      <th>Set</th>
+      <th>Quantity</th>
+      <th>Width</th>
+      <th>Length</th>
+      <th>Barcode</th>
+      <th>Delivery date</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -35,7 +35,7 @@
         <td><?php echo $item['delivery_date']; ?></td>
         <td>
           <?php echo $this->tag->linkTo(['export/exportSingle/' .
-            $item['id'], ' Export', 'class' => 'btn btn-success']); ?>
+            $item['id'], ' Export', 'class' => 'btn btn-xs btn-success']); ?>
         </td>
       </tr>
     <?php } ?>
