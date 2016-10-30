@@ -69,13 +69,17 @@ class OrderController extends ControllerBase {
     $this->view->form = $form;
   }
 
-  public function detailsAction ($id) {
+  public function detailsAction ($id, $ordered) {
     $items = Items::find([
         "parent_order = {$id}",
-        'order_by order_custom ASC'
+        'order' => 'order_custom ASC'
     ])->toArray();
 
-    $this->view->items = $this->sortArrayByArray($items, $this->fixture['sortOrder']);
+    $this->view->items = $items;
+
+    if (!$ordered) {
+      $this->view->items = $this->sortArrayByArray($items, $this->fixture['sortOrder']);
+    }
   }
 
   public function manageAction ($id, $ordered) {

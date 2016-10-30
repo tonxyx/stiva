@@ -18,7 +18,8 @@
       <td><?php echo date('d.m.Y', strtotime($order->upload_date)); ?></td>
       <td><?php echo $order->delivery_date; ?></td>
       <td colspan="3">
-        <?php echo $this->tag->linkTo(['order/details/' . $order->id, 'Details', 'class' => 'btn btn-xs btn-default']); ?>
+        <?php echo $this->tag->linkTo(['order/details/' . $order->id . '/' . $order->ordered,
+         'Details', 'class' => 'btn btn-xs btn-default']); ?>
         <?php echo $this->tag->linkTo(['order/manage/' . $order->id . '/' . $order->ordered,
          ' Manage', 'class' => 'btn btn-xs btn-primary']); ?>
         <?php echo $this->tag->linkTo(['export/export/' . $order->id, ' Export', 'class' => 'btn btn-xs btn-success']); ?>
