@@ -25,11 +25,35 @@
           mode: 'inline',
         });
 
-        $('[data-sortable-table]').sortable({
+        var group = $('[data-sortable-table]').sortable({
           containerSelector: 'table',
           itemPath: '> tbody',
           itemSelector: 'tr',
-          placeholder: '<tr class="placeholder"/>'
+          placeholder: '<tr class="placeholder"/>',
+          group: 'serialization',
+          onDragStart: function ($item, container, _super) {
+            oldIndex = $item.index() + 1;
+            $item.appendTo($item.parent());
+            _super($item, container);
+          },
+          onDrop: function  ($item, container, _super) {
+            var field;
+            var newIndex = $item.index() + 1;
+
+            if(newIndex != oldIndex) {
+              var dataOrder = group.sortable("serialize").get();
+
+              $.ajax({
+                type: 'POST',
+                url: $item.parent().data('sortable-url'),
+                data: {
+                  data: JSON.stringify(dataOrder)
+                }
+              });
+            }
+
+            _super($item, container);
+          }
         });
 
       });

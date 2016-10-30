@@ -25,6 +25,7 @@ CREATE TABLE `orders` (
   `file_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `upload_date` date COLLATE utf8_unicode_ci NOT NULL,
   `delivery_date` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `ordered` tinyint(1) unsigned default 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -35,6 +36,7 @@ DROP TABLE IF EXISTS `items`;
 CREATE TABLE `items` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `parent_order` int(10) unsigned NOT NULL,
+  `order_custom` int(5) unsigned default 0,
   `group` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `order_id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `item_no` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
@@ -57,10 +59,13 @@ DROP TABLE IF EXISTS `packages`;
 CREATE TABLE `packages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `item_id` int(10) unsigned NOT NULL,
+  `order_custom` int(5) unsigned NOT NULL,
   `primary_no` int(20) unsigned NOT NULL,
   `primary_quantity` int(20) unsigned NOT NULL,
+  `primary_type` int(2) unsigned NOT NULL,
   `primary_leftover_quantity` int(20) unsigned NOT NULL,
   `secondary_no` int(20) unsigned default 0,
+  `secondary_type` int(2) unsigned default 0,
   `secondary_quantity` int(20) unsigned default 0,
   `total_quantity` int(20) unsigned NOT NULL,
   `total_leftover_quantity` int(20) unsigned NOT NULL,

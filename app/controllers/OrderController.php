@@ -14,9 +14,9 @@ class OrderController extends ControllerBase {
     $currentPage = $this->request->get('page', 1);
 
     $paginator = new \Phalcon\Paginator\Adapter\Model([
-        "data" => $orders,
-        "limit" => 10,
-        "page" => $currentPage
+      "data" => $orders,
+      "limit" => 10,
+      "page" => $currentPage,
     ]);
 
     $this->view->data = $paginator->getPaginate();
@@ -72,14 +72,16 @@ class OrderController extends ControllerBase {
   public function detailsAction ($id) {
     $items = Items::find([
         "parent_order = {$id}",
+        'order_by order_custom ASC'
     ])->toArray();
 
     $this->view->items = $this->sortArrayByArray($items, $this->fixture['sortOrder']);
   }
 
-  public function manageAction ($id) {
+  public function manageAction ($id, $ordered) {
     $items = Items::find([
         "parent_order = {$id}",
+        'order' => 'order_custom ASC'
     ]);
 
     $managedData = [];
@@ -90,14 +92,16 @@ class OrderController extends ControllerBase {
         'quantity' => $item->quantity,
         'width' => $item->width,
         'length' => $item->length,
-        'width' => $item->width,
-        'length' => $item->length,
         'barcode' => $item->barcode,
         'calculationData' => Packages::find("item_id=$item->id")->toArray()[0],
       ];
     }
 
-    $this->view->managedData = $this->sortArrayByArray($managedData, $this->fixture['sortOrder']);
+    $this->view->managedData = $managedData;
+
+    if (!$ordered) {
+      $this->view->managedData = $this->sortArrayByArray($managedData, $this->fixture['sortOrder']);
+    }
   }
 
   public function updatePackageDataAction () {
@@ -114,8 +118,16 @@ class OrderController extends ControllerBase {
           $package->primary_no = $post['value'];
           $package->save();
           break;
+        case 'primaryType':
+          $package->primary_type = $post['value'];
+          $package->save();
+          break;
         case 'secondary':
           $package->secondary_no = $post['value'];
+          $package->save();
+          break;
+        case 'secondaryType':
+          $package->secondary_type = $post['value'];
           $package->save();
           break;
         case 'leftover':
@@ -130,6 +142,40 @@ class OrderController extends ControllerBase {
 
         return $response;
       }
+    } else {
+      $this->response->setContent(json_encode([
+        'error' => true,
+      ]));
+    }
+  }
+
+  public function updatePackageOrderAction () {
+    $this->view->disable();
+
+    if ($this->request->isPost() && $this->request->isAjax()) {
+      $orderData = json_decode($this->request->getPost('data'))[0];
+
+      foreach ($orderData as $key => $value) {
+        $newKey = ++$key;
+
+        $item = Items::findFirst("id=$value->id");
+        $item->order_custom = $newKey;
+        $item->save();
+
+        if ($key == 1) {
+          $order = Orders::findFirst("id=$item->parent_order");
+          $order->ordered = 1;
+          $order->save();
+        }
+
+        $package = Packages::findFirst("id=$value->id");
+        $package->order_custom = $newKey;
+        $package->save();
+      }
+
+      $this->response->setContent(json_encode([
+        'success' => true,
+      ]));
     } else {
       $this->response->setContent(json_encode([
         'error' => true,

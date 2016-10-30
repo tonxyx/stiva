@@ -25,6 +25,11 @@ class Packages extends Model {
   /**
    * @var int
    */
+  public $primary_type;
+
+  /**
+   * @var int
+   */
   public $primary_quantity;
 
   /**
@@ -36,6 +41,11 @@ class Packages extends Model {
    * @var int
    */
   public $secondary_no;
+
+  /**
+   * @var int
+   */
+  public $secondary_type;
 
   /**
    * @var int
@@ -59,6 +69,7 @@ class Packages extends Model {
     $this->setSource("packages");
 
     $this->belongsTo('item_id', 'Items', 'id', [
+      'alias' => 'Item',
       'reusable' => true,
     ]);
   }

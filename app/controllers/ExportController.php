@@ -59,7 +59,7 @@ class ExportController extends ControllerBase {
       ];
 
       if (count($types[$item->type]) == 1) {
-        $barcodeSecondPart = str_pad($types[$item->type][0], 3, '0', STR_PAD_LEFT);
+        $barcodeSecondPart = str_pad($itemPackage->primary_type, 3, '0', STR_PAD_LEFT);
 
         for ($i = 1; $i <= $itemPackage->primary_no; $i++) {
           $barcode = substr_replace($item->barcode, str_pad($i, 3, '0', STR_PAD_LEFT) . '-' . $barcodeSecondPart, -7);
@@ -69,13 +69,13 @@ class ExportController extends ControllerBase {
           $printData['items']['totalInPackage'][] = (int) $barcodeSecondPart;
         }
 
-        if ($itemPackage->primary_leftover_quantity) {
+        if ($itemPackage->total_leftover_quantity) {
           $barcodeLeftover = substr_replace($item->barcode, str_pad(++$itemPackage->primary_no, 3, '0', STR_PAD_LEFT) .
-            '-' . str_pad($itemPackage->primary_leftover_quantity, 3, '0', STR_PAD_LEFT), -7);
+            '-' . str_pad($itemPackage->total_leftover_quantity, 3, '0', STR_PAD_LEFT), -7);
           $printData['items']['barcode'][] = $barcodeLeftover;
           $printData['items']['barcodeCode'][] = $this->generateBarcodePNG($barcodeLeftover);
           $printData['items']['totalOfNo'][] = $itemPackage->primary_no;
-          $printData['items']['totalInPackage'][] = $itemPackage->primary_leftover_quantity;
+          $printData['items']['totalInPackage'][] = $itemPackage->total_leftover_quantity;
         }
 
       } else if (count($types[$item->type]) == 2) {

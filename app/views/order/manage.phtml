@@ -20,9 +20,11 @@
       <th>Actions</th>
     </tr>
   </thead>
-  <tbody data-editable-url="<?php echo $this->url->get('order/updatePackageData'); ?>">
+  <tbody data-editable-url="<?php echo $this->url->get('order/updatePackageData'); ?>"
+    data-sortable-url="<?php echo $this->url->get('order/updatePackageOrder'); ?>"
+    class="serialization">
     <?php foreach ($managedData as $itemKey => $item) { ?>
-      <tr>
+      <tr data-id="<?php echo $itemKey; ?>">
         <td><?php echo $item['customer_order']; ?></td>
         <td><?php echo $item['type']; ?></td>
         <td><?php echo $item['quantity']; ?></td>
@@ -34,17 +36,23 @@
             <span data-editable data-pk="<?php echo $itemKey . '_primary'; ?>">
               <?php echo $item['calculationData']['primary_no']; ?>
             </span>*
-              <?php echo $this->fixture['types'][$item['type']][0]; ?> +
+            <span data-editable data-pk="<?php echo $itemKey . '_primaryType'; ?>">
+              <?php echo $item['calculationData']['primary_type']; ?>
+            </span> +
             <span data-editable data-pk="<?php echo $itemKey . '_secondary'; ?>">
               <?php echo $item['calculationData']['secondary_no']; ?>
             </span>*
-            <?php echo $this->fixture['types'][$item['type']][1];
-          } else { ?>
+            <span data-editable data-pk="<?php echo $itemKey . '_secondaryType'; ?>">
+              <?php echo $item['calculationData']['secondary_type']; ?>
+            </span>
+          <?php } else { ?>
             <span data-editable data-pk="<?php echo $itemKey . '_primary'; ?>">
               <?php echo $item['calculationData']['primary_no']; ?>
             </span>*
-            <?php echo $this->fixture['types'][$item['type']][0];
-          } ?>
+            <span data-editable data-pk="<?php echo $itemKey . '_primaryType'; ?>">
+              <?php echo $item['calculationData']['primary_type']; ?>
+            </span>
+          <?php } ?>
         </td>
         <td>
           <span data-editable data-pk="<?php echo $itemKey . '_leftover'; ?>">

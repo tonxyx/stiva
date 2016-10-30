@@ -83,10 +83,12 @@ class Items extends Model {
     $this->setSource("items");
 
     $this->belongsTo('parent_order', 'Orders', 'id', [
+      'alias' => 'Order',
       'reusable' => true,
     ]);
 
-    $this->belongsTo('item_id', 'Packages', 'id', [
+    $this->hasOne('item_id', 'Packages', 'id', [
+      'alias' => 'Package',
       'reusable' => true,
     ]);
   }
@@ -121,9 +123,11 @@ class Items extends Model {
 
     $package = new Packages();
     $package->item_id = $item->id;
+    $package->order_custom = $item->id;
 
     if (count($typePackingParams) == 1) {
       $package->primary_no = $calculationData['primaryNo'] = intval($item->quantity/$typePackingParams[0]);
+      $package->primary_type = $calculationData['primaryType'] = $typePackingParams[0];
       $package->primary_quantity = $calculationData['primaryQuantity'] = $calculationData['primaryNo'] *
         $typePackingParams[0];
       $package->primary_leftover_quantity = $calculationData['primaryLeftoverQuantity'] = $item->quantity -
@@ -141,6 +145,7 @@ class Items extends Model {
         $package->primary_no = $calculationData['primaryNo'] = intval($item->quantity/$packingParamsSum);
       }
 
+      $package->primary_type = $calculationData['primaryType'] = $typePackingParams[0];
       $package->primary_quantity = $calculationData['primaryQuantity'] = $calculationData['primaryNo'] *
       $typePackingParams[0];
       $package->primary_leftover_quantity = $calculationData['primaryLeftoverQuantity'] = $item->quantity -
@@ -148,6 +153,7 @@ class Items extends Model {
 
       $package->secondary_no = $calculationData['secondaryNo'] =
         intval($calculationData['primaryLeftoverQuantity']/$typePackingParams[1]);
+      $package->secondary_type = $calculationData['secondaryType'] = $typePackingParams[0];
       $package->secondary_quantity = $calculationData['secondaryQuantity'] = $calculationData['secondaryNo'] *
         $typePackingParams[1];
       $package->total_quantity = $calculationData['totalQuantity'] = $calculationData['primaryQuantity'] +
