@@ -40,15 +40,15 @@ class ControllerBase extends Controller {
    * @return array
    */
   protected function sortArrayByArray (array $array, array $orderArray, $param = 'type') {
-      $ordered = array();
-      foreach ($orderArray as $sortKey) {
-        foreach ($array as $key => $value) {
-          if ($sortKey == $value[$param]) {
-              $ordered[$key] = $value;
-              unset($array[$key]);
-          }
+    $ordered = array();
+    foreach ($orderArray as $sortKey) {
+      foreach ($array as $key => $value) {
+        if ($sortKey == $value[$param]) {
+            $ordered[$key] = $value;
+            unset($array[$key]);
         }
       }
-      return $ordered + $array;
+    }
+    return $ordered + $array;
   }
 }

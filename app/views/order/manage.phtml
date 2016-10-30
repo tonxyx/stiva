@@ -12,20 +12,24 @@
       <th>Customer order</th>
       <th>Type</th>
       <th>Quantity</th>
+      <th>Width</th>
+      <th>Length</th>
       <th>Barcode</th>
       <th>Data</th>
       <th>Leftover</th>
       <th>Actions</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody data-editable-url="<?php echo $this->url->get('order/updatePackageData'); ?>">
     <?php foreach ($managedData as $itemKey => $item) { ?>
       <tr>
         <td><?php echo $item['customer_order']; ?></td>
         <td><?php echo $item['type']; ?></td>
         <td><?php echo $item['quantity']; ?></td>
+        <td><?php echo $item['width']; ?></td>
+        <td><?php echo $item['length']; ?></td>
         <td><?php echo $item['barcode']; ?></td>
-        <td data-editable-url="<?php echo $this->url->get('order/updatePackageData'); ?>">
+        <td>
           <?php if (isset($this->fixture['types'][$item['type']][1])) { ?>
             <span data-editable data-pk="<?php echo $itemKey . '_primary'; ?>">
               <?php echo $item['calculationData']['primary_no']; ?>

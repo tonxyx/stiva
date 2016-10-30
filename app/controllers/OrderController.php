@@ -30,7 +30,6 @@ class OrderController extends ControllerBase {
         $this->request->getUploadedFiles()[0]->getSize() > 0) {
       if ($form->isValid($this->request->getPost())) {
         foreach ($this->request->getUploadedFiles() as $file) {
-          // $fileName = date('Y-m-d') . '_' . $file->getName();
           $fileName = $file->getName();
           $filePath = $this->config->application->docsLink . $fileName;
 
@@ -73,8 +72,6 @@ class OrderController extends ControllerBase {
   public function detailsAction ($id) {
     $items = Items::find([
         "parent_order = {$id}",
-        // 'order' => 'customer_order ASC',
-        // 'order' => 'width DESC',
     ])->toArray();
 
     $this->view->items = $this->sortArrayByArray($items, $this->fixture['sortOrder']);
@@ -83,8 +80,6 @@ class OrderController extends ControllerBase {
   public function manageAction ($id) {
     $items = Items::find([
         "parent_order = {$id}",
-        // 'order' => 'customer_order ASC',
-        // 'order' => 'width DESC',
     ]);
 
     $managedData = [];
@@ -93,6 +88,10 @@ class OrderController extends ControllerBase {
         'customer_order' => $item->customer_order,
         'type' => $item->type,
         'quantity' => $item->quantity,
+        'width' => $item->width,
+        'length' => $item->length,
+        'width' => $item->width,
+        'length' => $item->length,
         'barcode' => $item->barcode,
         'calculationData' => Packages::find("item_id=$item->id")->toArray()[0],
       ];

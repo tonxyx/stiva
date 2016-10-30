@@ -176,8 +176,6 @@ class ExportController extends ControllerBase {
   public function exportAction ($order) {
     $orderItems = Items::find([
       "parent_order=$order",
-      // 'order' => 'customer_order ASC',
-      // 'order' => 'width DESC',
     ]);
 
     $orderData = [];
