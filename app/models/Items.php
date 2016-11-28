@@ -153,7 +153,7 @@ class Items extends Model {
 
       $package->secondary_no = $calculationData['secondaryNo'] =
         intval($calculationData['primaryLeftoverQuantity']/$typePackingParams[1]);
-      $package->secondary_type = $calculationData['secondaryType'] = $typePackingParams[0];
+      $package->secondary_type = $calculationData['secondaryType'] = $typePackingParams[1];
       $package->secondary_quantity = $calculationData['secondaryQuantity'] = $calculationData['secondaryNo'] *
         $typePackingParams[1];
       $package->total_quantity = $calculationData['totalQuantity'] = $calculationData['primaryQuantity'] +
